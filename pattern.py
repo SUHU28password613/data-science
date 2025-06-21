@@ -1,5 +1,4 @@
 from turtle import *
-
 #pentagon
 pencolor('red')
 speed('slowest')
@@ -14,7 +13,7 @@ left(72)
 forward(100)
 left(72)
 forward(100)
-left(72)
+right(72)
 end_fill()
 hideturtle()
 
