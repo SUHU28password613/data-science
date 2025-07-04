@@ -9,3 +9,4 @@ else:
             break
     else:
         print(f"{num} is a prime number")
+

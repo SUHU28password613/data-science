@@ -1,3 +1,4 @@
+
 num = int (input("Enter a number :"))
 original = num
 rev = 0
@@ -9,3 +10,4 @@ if original == rev:
     print(f"{original} is a pallindrome")
 else:
     print(f"{original} is not a pallidrome")
+    
