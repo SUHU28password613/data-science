@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCare - Our Facilities</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #005f73;
+            --secondary: #0a9396;
+            --accent: #94d2bd;
+            --light: #e9d8a6;
+            --highlight: #ee9b00;
+            --dark: #001219;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--highlight);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--highlight);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .hero {
+            background: url('https://placehold.co/1920x800') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--highlight);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .facilities {
+            padding: 3rem 0;
+        }
+        
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .facility-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .facility-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .facility-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .facility-card:hover .facility-img img {
+            transform: scale(1.1);
+        }
+        
+        .facility-content {
+            padding: 1.5rem;
+        }
+        
+        .facility-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .facility-content p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .facility-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+            margin-bottom: 1rem;
+        }
+        
+        .special-features {
+            background: linear-gradient(135deg, #f0f7fa, #e6f0f2);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .features-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .feature-box {
+            flex: 1 1 300px;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-box p {
+            color: #666;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .testimonials {
+            padding: 4rem 0;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial-slide {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial-slide.active {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .testimonial-role {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--highlight);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--highlight);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--highlight);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+                z-index: 1000;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                z-index: 1001;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .btn {
+                display: block;
+                margin: 0 auto 1rem;
+                width: 80%;
+            }
+            
+            .btn-outline {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .feature-box {
+                flex: 1 1 100%;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fas fa-heartbeat"></i>MedCare</a>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#" class="active">Facilities</a></li>
+                    <li><a href="#">Doctors</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content container">
+            <h1>World-Class Healthcare Facilities</h1>
+            <p>Experience cutting-edge medical technology and compassionate care in our state-of-the-art facilities designed for your wellbeing.</p>
+            <a href="#facilities" class="btn">Explore Facilities</a>
+            <a href="#" class="btn btn-outline">Book Appointment</a>
+        </div>
+    </section>
+
+    <section id="facilities" class="facilities">
+        <div class="container">
+            <h2 class="section-title">Our Medical Facilities</h2>
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Modern operating room with advanced surgical equipment and LED lighting">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-procedures"></i>
+                        </div>
+                        <h3>Advanced Surgical Suites</h3>
+                        <p>Our operating rooms feature the latest minimally invasive surgical technology with robotic assistance and 4K imaging systems for precise procedures.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Neonatal intensive care unit with incubators and monitoring equipment">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <h3>Neonatal Intensive Care</h3>
+                        <p>Level III NICU providing specialized care for premature and critically ill newborns with advanced monitoring and life support systems.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Diagnostic imaging center with MRI and CT scanning equipment">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-x-ray"></i>
+                        </div>
+                        <h3>Diagnostic Imaging Center</h3>
+                        <p>Comprehensive imaging services including 3T MRI, 64-slice CT, digital mammography, ultrasound, and fluoroscopy with low radiation technology.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Cardiac catheterization lab with advanced monitoring equipment">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Cardiac Care Unit</h3>
+                        <p>State-of-the-art cardiac catheterization labs and dedicated cardiac ICU for comprehensive heart care and interventions.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Physical therapy gym with exercise equipment and rehabilitation tools">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-wheelchair"></i>
+                        </div>
+                        <h3>Rehabilitation Center</h3>
+                        <p>Comprehensive physical, occupational, and speech therapy programs with aquatic therapy pool and advanced rehabilitation technology.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="facility-card">
+                    <div class="facility-img">
+                        <img src="https://placehold.co/800x500" alt="Modern emergency room with trauma bays and emergency equipment">
+                    </div>
+                    <div class="facility-content">
+                        <div class="facility-icon">
+                            <i class="fas fa-ambulance"></i>
+                        </div>
+                        <h3>Emergency & Trauma Center</h3>
+                        <p>24/7 emergency services with dedicated trauma bays, pediatric emergency area, and rapid assessment zones for immediate care.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="special-features">
+        <div class="container">
+            <h2 class="section-title">Our Special Features</h2>
+            <div class="features-container">
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Infection Control</h3>
+                    <p>Advanced air filtration systems and rigorous disinfection protocols to ensure patient safety and prevent hospital-acquired infections.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas-robot"></i>
+                    </div>
+                    <h3>Robotic Surgery</h3>
+                    <p>Precision-guided robotic-assisted surgery for complex procedures with minimal scarring and faster recovery times.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Neurology Center</h3>
+                    <p>Comprehensive neurologic care including stroke intervention, epilepsy monitoring, and movement disorder treatments.</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Healing Environment</h3>
+                    <p>Patient-centered design with natural light, healing gardens, and noise-reduction features to promote recovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content container">
+            <h2>Ready to Experience Our World-Class Facilities?</h2>
+            <p>Schedule an appointment today and let our caring team guide you through your healthcare journey.</p>
+            <a href="#" class="btn">Book Appointment</a>
+            <a href="#" class="btn btn-outline">Virtual Tour</a>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Patient Experiences</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <div class="testimonial-content">
+                        "The cardiac care I received was exceptional. The facilities were modern and the staff was incredibly attentive to my needs throughout my treatment."
+                    </div>
+                    <div class="testimonial-author">Robert Johnson</div>
+                    <div class="testimonial-role">Cardiac Patient</div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        "As a new mother, I was nervous about delivery, but the maternity ward made me feel completely comfortable with their beautiful facilities and caring team."
+                    </div>
+                    <div class="testimonial-author">Sarah Williams</div>
+                    <div class="testimonial-role">Maternity Patient</div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <div class="testimonial-content">
+                        "After my knee replacement, the rehabilitation center helped me regain mobility faster than I expected. The equipment was top-notch and the therapists were wonderful."
+                    </div>
+                    <div class="testimonial-author">Michael Chen</div>
+                    <div class="testimonial-role">Rehabilitation Patient</div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <div class="testimonial-dot active" data-slide="0"></div>
+                    <div class="testimonial-dot" data-slide="1"></div>
+                    <div class="testimonial-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MedCare</h3>
+                    <p>Delivering compassionate healthcare with cutting-edge technology for better patient outcomes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Facilities</a></li>
+                        <li><a href="#">Doctors</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Facilities</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Surgical Center</a></li>
+                        <li><a href="#">Cardiac Care</a></li>
+                        <li><a href="#">Maternity Ward</a></li>
+                        <li><a href="#">Emergency Care</a></li>
+                        <li><a href="#">Diagnostic Imaging</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Health St, Medical City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@medcare.com</li>
+                        <li><i class="fas fa-clock"></i> 24/7 Emergency</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 MedCare Healthcare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Smooth Scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if(navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Testimonial Slider
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        
+        function showSlide(index) {
+            // Hide all slides
+            testimonialSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            testimonialDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show selected slide and activate corresponding dot
+            testimonialSlides[index].classList.add('active');
+            testimonialDots[index].classList.add('active');
+        }
+        
+        // Add click event to dots
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+        
+        // Auto-rotate testimonials
+        let currentSlide = 0;
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % testimonialSlides.length;
+            showSlide(currentSlide);
+        }, 5000);
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.facility-card, .feature-box');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if(elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animation
+        document.querySelectorAll('.facility-card, .feature-box').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(30px)';
+            element.style.transition = 'all 0.6s ease';
+        });
+
+        // Add scroll event listener
+        window.addEventListener('scroll', animateOnScroll);
+        // Trigger once on page load
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

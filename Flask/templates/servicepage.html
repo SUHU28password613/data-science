@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Plus - Healthcare Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --secondary: #4299e1;
+            --accent: #f6ad55;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #2b6cb0 0%, #4299e1 100%);
+        }
+
+        .service-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(66, 153, 225, 0.1);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 32px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse-on-hover:hover {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-heartbeat text-3xl"></i>
+                <span class="text-2xl font-bold">MediCare Plus</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-gray-300">Home</a>
+                <a href="#" class="font-bold border-b-2 border-white">Services</a>
+                <a href="#" class="hover:text-gray-300">Doctors</a>
+                <a href="#" class="hover:text-gray-300">Appointments</a>
+                <a href="#" class="hover:text-gray-300">About</a>
+                <a href="#" class="hover:text-gray-300">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative">
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81e1e307-49f5-4b9a-922c-f910b5f54077.png" alt="Modern hospital reception area with friendly staff helping patients at the counter" class="w-full h-96 object-cover">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-center px-4">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Healthcare Services</h1>
+                <p class="text-xl mb-6 max-w-2xl mx-auto">Comprehensive medical care designed for your health and wellness</p>
+                <button class="bg-white text-blue-800 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">
+                    Book an Appointment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-6 py-12">
+        <!-- Services Section -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Healthcare Services</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    We offer a wide range of medical services to meet all your healthcare needs. Our expert team provides personalized care with the latest medical technologies.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service Card 1 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">General Consultation</h3>
+                    <p class="text-gray-600 mb-6">
+                        Comprehensive health assessment and diagnosis with our experienced physicians.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Cardiology</h3>
+                    <p class="text-gray-600 mb-6">
+                        Specialized care for heart conditions including diagnostics and treatment plans.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-x-ray"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Diagnostic Imaging</h3>
+                    <p class="text-gray-600 mb-6">
+                        Advanced imaging technology including X-ray, MRI, and ultrasound services.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Dental Care</h3>
+                    <p class="text-gray-600 mb-6">
+                        Complete dental services from routine checkups to cosmetic dentistry.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Pediatrics</h3>
+                    <p class="text-gray-600 mb-6">
+                        Comprehensive healthcare for infants, children, and adolescents.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 6 -->
+                <div class="service-card bg-white p-8">
+                    <div class="feature-icon mb-6">
+                        <i class="fas fa-procedures"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Surgical Services</h3>
+                    <p class="text-gray-600 mb-6">
+                        State-of-the-art surgical procedures performed by skilled surgeons.
+                    </p>
+                    <a href="#" class="text-blue-600 font-medium flex items-center">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Our State-of-the-Art Facility</h2>
+                    <p class="text-gray-600 mb-6">
+                        Take a virtual tour of our modern healthcare facility equipped with the latest medical technology. Our team of specialists is dedicated to providing compassionate care in a comfortable environment.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>Modern Equipment</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>Expert Specialists</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>Patient-Centered Care</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>24/7 Emergency</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-container rounded-lg shadow-xl">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specialist Team Section -->
+        <section class="mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Meet Our Specialists</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">
+                    Our team of board-certified physicians and healthcare professionals are committed to your wellbeing.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Doctor 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md service-card pulse-on-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4bfa1ec1-dc10-4547-8f81-4a0ecfc9435a.png" alt="Senior cardiologist smiling in white coat with stethoscope" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. Sarah Johnson</h3>
+                        <p class="text-blue-600 mb-2">Cardiologist</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Over 15 years of experience in cardiac care and preventive cardiology.
+                        </p>
+                        <button class="text-blue-600 font-medium flex items-center">
+                            View Profile <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md service-card pulse-on-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8e39d64f-6741-4fa5-8a40-4942a23b4d2d.png" alt="Pediatrician holding a child's hand in examination room" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. Michael Chen</h3>
+                        <p class="text-blue-600 mb-2">Pediatrician</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Specialist in child development and pediatric emergency care.
+                        </p>
+                        <button class="text-blue-600 font-medium flex items-center">
+                            View Profile <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md service-card pulse-on-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/845daeb6-17a5-4ff6-a40d-ea7f6cef70ca.png" alt="Female dentist explaining dental procedure to patient" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. Amelia Rodriguez</h3>
+                        <p class="text-blue-600 mb-2">Dentist</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Expert in cosmetic dentistry and oral health maintenance.
+                        </p>
+                        <button class="text-blue-600 font-medium flex items-center">
+                            View Profile <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Doctor 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md service-card pulse-on-hover">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b68aa4e3-47ef-433f-a47d-ace61bfd3195.png" alt="Neurologist examining brain scans on digital display" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. James Wilson</h3>
+                        <p class="text-blue-600 mb-2">Neurologist</p>
+                        <p class="text-gray-600 text-sm mb-4">
+                            Specialist in neurological disorders and rehabilitation.
+                        </p>
+                        <button class="text-blue-600 font-medium flex items-center">
+                            View Profile <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="gradient-bg text-white rounded-2xl p-8 mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Patient Testimonials</h2>
+                <p class="max-w-3xl mx-auto opacity-80">
+                    Hear what our patients say about their experience with our healthcare services.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e4bf716-c5db-4941-8c83-3af669004d11.png" alt="Portrait of happy middle-aged male patient" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Robert Johnson</h4>
+                            <div class="flex text-yellow-300">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        "The cardiac care I received was exceptional. Dr. Johnson explained everything clearly and the staff made me feel comfortable throughout my treatment."
+                    </p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3bbfba79-acb3-4a81-9bef-1f9c012c8a8a.png" alt="Young mother holding baby in pediatric clinic" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Lisa Thompson</h4>
+                            <div class="flex text-yellow-300">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        "Dr. Chen has been our pediatrician for both our children. His patience and thoroughness put both parents and kids at ease."
+                    </p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white bg-opacity-10 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ca3a5480-106f-4123-b44d-b3bf65400d42.png" alt="Elderly woman smiling after successful dental procedure" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Margaret Williams</h4>
+                            <div class="flex text-yellow-300">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p>
+                        "After avoiding dentists for years, Dr. Rodriguez made the experience painless. My new smile has given me so much confidence."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="bg-gradient-to-r from-blue-500 to-blue-700 rounded-2xl p-8 md:p-12 text-white text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Prioritize Your Health?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Book an appointment with our specialists today and take the first step towards better health.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-white text-blue-800 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300">
+                    Book Now
+                </button>
+                <button class="border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white hover:bg-opacity-20 transition duration-300">
+                    Call: (555) 123-4567
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="bg-gray-100 py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Frequently Asked Questions</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+                    <div class="faq-item border-b border-gray-200">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                            <span class="text-lg font-medium text-gray-800">What insurance plans do you accept?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-4 hidden">
+                            <p class="text-gray-600">
+                                We accept most major insurance plans including Medicare, Blue Cross Blue Shield, Aetna, Cigna, and UnitedHealthcare. Please contact our billing department for specific coverage details.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border-b border-gray-200">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                            <span class="text-lg font-medium text-gray-800">How do I schedule an appointment?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-4 hidden">
+                            <p class="text-gray-600">
+                                You can schedule an appointment by calling our office at (555) 123-4567, using our online booking system, or through the patient portal. New patients should arrive 15 minutes early to complete paperwork.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item border-b border-gray-200">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                            <span class="text-lg font-medium text-gray-800">What if I need emergency care?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-4 hidden">
+                            <p class="text-gray-600">
+                                Our emergency department is open 24/7 for urgent medical needs. For life-threatening emergencies, please call 911 or go to the nearest emergency room immediately.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none">
+                            <span class="text-lg font-medium text-gray-800">How can I access my medical records?</span>
+                            <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer px-6 pb-4 hidden">
+                            <p class="text-gray-600">
+                                You can access your medical records securely through our patient portal. Alternatively, you may request paper copies by submitting a signed release form at our office. Processing may take 3-5 business days.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-heartbeat text-3xl text-blue-400"></i>
+                        <span class="text-2xl font-bold">MediCare Plus</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Providing exceptional healthcare services with compassion and expertise.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Doctors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Appointments</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">General Medicine</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Cardiology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pediatrics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dentistry</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Diagnostics</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <address class="text-gray-400 not-italic space-y-2">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
+                            <span>123 Medical Drive, Health City, HC 12345</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-blue-400"></i>
+                            <span>(555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <span>info@medicareplus.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-3 text-blue-400"></i>
+                            <span>Mon-Fri: 8:00 AM - 6:00 PM</span>
+                        </div>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>© 2023 MediCare Plus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-item button').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden button');
+        mobileMenuButton.addEventListener('click', () => {
+            const mobileMenu = document.querySelector('.md\\:hidden + div');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
+

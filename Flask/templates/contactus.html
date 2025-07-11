@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Medicare Plus E-Healthcare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(52,152,219,0.9) 0%, rgba(46,204,113,0.9) 100%);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(52,152,219,0.25);
+        }
+
+        .iframe-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #successMessage {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Hero Section with Background Image -->
+    <section class="hero-gradient text-white py-20">
+        <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Connect With Medicare Plus</h1>
+                <p class="text-xl mb-8">Your health is our priority. Reach out to our dedicated team for support, questions, or feedback about our e-healthcare services.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="scrollToForm()" class="bg-white text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full font-semibold transition duration-300">
+                        Contact Us Today
+                    </button>
+                    <button onclick="playIntroVideo()" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-full font-semibold transition duration-300 flex items-center">
+                        <i class="fas fa-play mr-2"></i> Watch Video
+                    </button>
+                </div>
+            </div>
+            <div class="lg:w-1/2">
+                <img src="https://placehold.co/800x600" alt="Friendly healthcare professionals in a modern clinic setting helping elderly patient with digital tablet" class="rounded-lg shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Medicare Plus</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl text-center hover:bg-white border border-gray-100 transition duration-300">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">24/7 Support</h3>
+                    <p class="text-gray-600">Our dedicated support team is available round the clock to assist you with any queries or concerns.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center hover:bg-white border border-gray-100 transition duration-300">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Expert Doctors</h3>
+                    <p class="text-gray-600">Connect with board-certified physicians who specialize in telemedicine and remote patient care.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl text-center hover:bg-white border border-gray-100 transition duration-300">
+                    <div class="feature-icon mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Mobile Access</h3>
+                    <p class="text-gray-600">Manage your healthcare needs from anywhere with our fully responsive mobile-friendly platform.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Introduction -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">How Medicare Plus Works</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="iframe-container rounded-xl overflow-hidden shadow-xl">
+                    <iframe id="introVideo" src="https://www.youtube.com/embed/_placeholder_" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Multiple Ways to Reach Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="contact-card bg-white p-8 rounded-xl border border-gray-200">
+                    <div class="text-blue-600 mb-4">
+                        <i class="fas fa-phone-alt text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Phone Support</h3>
+                    <p class="text-gray-600 mb-4">Speak directly with our healthcare representatives for immediate assistance.</p>
+                    <a href="tel:+18005551234" class="text-blue-600 font-semibold hover:text-blue-800 transition duration-300">
+                        +1 (800) 555-1234
+                    </a>
+                </div>
+                <div class="contact-card bg-white p-8 rounded-xl border border-gray-200">
+                    <div class="text-green-600 mb-4">
+                        <i class="fas fa-envelope text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Email Us</h3>
+                    <p class="text-gray-600 mb-4">Send us your questions and we'll respond within 24 business hours.</p>
+                    <a href="mailto:info@medicareplus.com" class="text-green-600 font-semibold hover:text-green-800 transition duration-300">
+                        info@medicareplus.com
+                    </a>
+                </div>
+                <div class="contact-card bg-white p-8 rounded-xl border border-gray-200">
+                    <div class="text-purple-600 mb-4">
+                        <i class="fas fa-comments text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Live Chat</h3>
+                    <p class="text-gray-600 mb-4">Get instant responses from our virtual assistants available 24/7.</p>
+                    <button onclick="openChatWindow()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-full font-semibold transition duration-300">
+                        Start Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contactForm" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-gray-50 rounded-xl p-8 md:p-12 shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-gray-800">Send Us a Message</h2>
+                <p class="text-gray-600 mb-8">Fill out the form below and our team will get back to you as soon as possible.</p>
+                
+                <form id="contactFormElement" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-300" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-300" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-300" required>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700 font-medium mb-2">Your Message</label>
+                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition duration-300" required></textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agree" name="agree" class="mr-2" required>
+                        <label for="agree" class="text-gray-600">I agree to the <a href="#" class="text-blue-600 hover:underline">privacy policy</a> and terms of service.</label>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+                        Send Message
+                    </button>
+                </form>
+
+                <div id="successMessage" class="mt-6 p-4 bg-green-100 text-green-800 rounded-lg text-center">
+                    <i class="fas fa-check-circle mr-2"></i> Thank you! Your message has been sent successfully.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Map -->
+    <section class="bg-gray-100 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Our Headquarters</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="iframe-container rounded-xl overflow-hidden shadow-xl">
+                    <iframe src="https://www.google.com/maps/embed?pb=!_placeholder_" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Medicare Plus Corporate Office</h3>
+                    <p class="text-gray-600 mb-6">123 Healthcare Plaza, Suite 450<br>San Francisco, CA 94107<br>United States</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt text-blue-600 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Phone</h4>
+                                <p class="text-gray-600">+1 (800) 555-1234</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-green-600 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Email</h4>
+                                <p class="text-gray-600">info@medicareplus.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fas fa-clock text-yellow-600 mt-1 mr-4"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Business Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 8:00 AM - 8:00 PM (EST)<br>Saturday: 9:00 AM - 4:00 PM (EST)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">What Our Patients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/80x80" alt="Smiling elderly woman with gray hair and glasses" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Margaret T.</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The support team at Medicare Plus is exceptional. They walked me through setting up my account and were so patient with all my questions."</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/80x80" alt="Middle-aged man with short brown hair and friendly expression" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Robert J.</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"I was able to connect with a specialist within 15 minutes through their telemedicine service. Truly life-changing technology!"</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/80x80" alt="Senior African American man with salt-and-pepper hair smiling" class="w-16 h-16 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">William C.</h4>
+                            <div class="text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The mobile app makes managing my medications and appointments so easy. Customer service is always helpful when I need assistance."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <button onclick="toggleFAQ(1)" class="w-full flex justify-between items-center text-left font-semibold text-blue-600">
+                        <span>How do I schedule a telemedicine appointment?</span>
+                        <i id="faqIcon1" class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqContent1" class="mt-3 text-gray-600 hidden">
+                        <p>You can schedule a telemedicine appointment through our mobile app, online patient portal, or by calling our support team. Once scheduled, you'll receive a confirmation with instructions for your virtual visit.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <button onclick="toggleFAQ(2)" class="w-full flex justify-between items-center text-left font-semibold text-blue-600">
+                        <span>What information do I need to provide when contacting support?</span>
+                        <i id="faqIcon2" class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqContent2" class="mt-3 text-gray-600 hidden">
+                        <p>When contacting our support team, please have your Medicare Plus ID or account information ready. For medical questions, please have your symptom details, medication list, and any relevant medical history available to share with the specialist.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <button onclick="toggleFAQ(3)" class="w-full flex justify-between items-center text-left font-semibold text-blue-600">
+                        <span>How quickly can I expect a response to my email?</span>
+                        <i id="faqIcon3" class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqContent3" class="mt-3 text-gray-600 hidden">
+                        <p>Our team strives to respond to all emails within 24 business hours. For urgent medical inquiries, we recommend using our telemedicine services or calling our 24/7 support line for immediate assistance.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <button onclick="toggleFAQ(4)" class="w-full flex justify-between items-center text-left font-semibold text-blue-600">
+                        <span>Is Medicare Plus covered by insurance?</span>
+                        <i id="faqIcon4" class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </button>
+                    <div id="faqContent4" class="mt-3 text-gray-600 hidden">
+                        <p>Medicare Plus is accepted by most major insurance providers, including Medicare and Medicare Advantage plans. Our support team can verify your benefits and provide detailed coverage information specific to your plan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white font-semibold text-xl mb-4">Medicare Plus</h3>
+                    <p class="mb-4">Providing innovative e-healthcare solutions to improve patient outcomes through technology and compassionate care.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-400 hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-blue-400 hover:text-white transition duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-pink-500 hover:text-white transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-blue-700 hover:text-white transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition duration-300">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Doctors</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Appointments</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-300">Patient Portal</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Contact Info</h3>
+                    <address class="not-italic">
+                        <p class="mb-1">123 Healthcare Plaza</p>
+                        <p class="mb-1">San Francisco, CA 94107</p>
+                        <p class="mb-1">United States</p>
+                        <p class="mb-1">Phone: +1 (800) 555-1234</p>
+                        <p class="mb-1">Email: info@medicareplus.com</p>
+                    </address>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Newsletter</h3>
+                    <p class="mb-4">Subscribe to our newsletter for health tips and updates.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l-lg focus:outline-none text-gray-900">
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r-lg transition duration-300">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p>&copy; 2023 Medicare Plus. All rights reserved. | <a href="#" class="hover:text-white transition duration-300">Privacy Policy</a> | <a href="#" class="hover:text-white transition duration-300">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Button (Fixed) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="openChatWindow()" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg flex items-center justify-center transition duration-300 hover:shadow-xl">
+            <i class="fas fa-comment-dots text-2xl"></i>
+            <span class="ml-2 font-semibold">Live Chat</span>
+            <span class="absolute top-0 right-0 h-3 w-3 bg-green-400 rounded-full animate-pulse"></span>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll to contact form
+        function scrollToForm() {
+            document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Play intro video
+        function playIntroVideo() {
+            const video = document.getElementById('introVideo');
+            video.src = video.src.replace('_placeholder_', 'dQw4w9WgXcQ'); // Default placeholder, replace with actual video ID
+            video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            video.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Open chat window
+        function openChatWindow() {
+            alert('Live chat will open in a new window. In a real implementation, this would connect to your live chat service.');
+            // In a real implementation, this would connect to your live chat service
+        }
+
+        // Toggle FAQ items
+        function toggleFAQ(index) {
+            const content = document.getElementById('faqContent' + index);
+            const icon = document.getElementById('faqIcon' + index);
+            content.classList.toggle('hidden');
+            icon.classList.toggle('transform');
+            icon.classList.toggle('rotate-180');
+        }
+
+        // Form submission
+        document.getElementById('contactFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real implementation, this would send the form data to your server
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.opacity = '1';
+            this.reset();
+            setTimeout(() => {
+                successMessage.style.opacity = '0';
+            }, 5000);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

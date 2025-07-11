@@ -3,9 +3,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MediCare - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-video {
+            position: relative;
+            height: 80vh;
+            overflow: hidden;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 119, 182, 0.7);
+        }
+        
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter-item {
+            transition: all 0.3s ease;
+        }
+        
+        .counter-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .testimonial-card.active {
+            opacity: 1;
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
-<body>
-    <h1>About Us</h1>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/825622b7-c0cc-40f7-9a98-93a6614f9c1e.png" alt="MediCare logo with a blue cross symbol and modern typography" class="h-12">
+                    <span class="ml-3 text-2xl font-bold text-blue-600">MediCare</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#" class="text-blue-600 font-medium">About</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Services</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Doctors</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
+                </div>
+                <button class="md:hidden focus:outline-none">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video Background -->
+    <section class="hero-video">
+        <div class="video-overlay flex items-center justify-center">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">About MediCare</h1>
+                <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Revolutionizing healthcare through technology and compassionate service</p>
+                <a href="#our-mission" class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-blue-50 transition duration-300">Learn More</a>
+            </div>
+        </div>
+        <video autoplay muted loop class="w-full h-full object-cover">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-doctor-with-a-stethoscope-in-a-hospital-48200-large.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section id="our-mission" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Mission & Vision</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a3e240bf-c304-4796-a9f9-4d18b166f724.png" alt="Diverse team of healthcare professionals discussing patient care in a modern hospital setting" class="rounded-lg shadow-xl">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Making Healthcare Accessible to All</h3>
+                    <p class="text-gray-600 mb-6">Founded in 2015, MediCare has been at the forefront of digital healthcare innovation. We believe that quality healthcare should be accessible, affordable, and convenient for everyone, regardless of their location or socioeconomic status.</p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">24/7 access to qualified doctors via video consultation</p>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">AI-powered symptom checker for quick preliminary diagnosis</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-2 rounded-full mr-4">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <p class="text-gray-700">Digital prescription and medicine delivery service</p>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Watch Our Story</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="counter-item p-6">
+                    <div class="text-4xl font-bold mb-2 counter" data-target="500">0</div>
+                    <div class="text-lg">Qualified Doctors</div>
+                </div>
+                <div class="counter-item p-6">
+                    <div class="text-4xl font-bold mb-2 counter" data-target="250000">0</div>
+                    <div class="text-lg">Patients Served</div>
+                </div>
+                <div class="counter-item p-6">
+                    <div class="text-4xl font-bold mb-2 counter" data-target="24">0</div>
+                    <div class="text-lg">Hour Support</div>
+                </div>
+                <div class="counter-item p-6">
+                    <div class="text-4xl font-bold mb-2 counter" data-target="95">0</div>
+                    <div class="text-lg">% Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Leadership Team</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c8761878-0c85-49bf-ab25-44506ea9e919.png" alt="Dr. Sarah Johnson, Chief Medical Officer, middle-aged woman with short brown hair wearing white coat and stethoscope" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. Sarah Johnson</h3>
+                        <p class="text-blue-600 mb-3">Chief Medical Officer</p>
+                        <p class="text-gray-600 text-sm">Board-certified physician with 20+ years of experience in internal medicine.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f610ec96-1802-4a1f-853c-98ff4d5e9331.png" alt="Raj Patel, CEO, middle-aged South Asian man in business casual attire smiling confidently" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Raj Patel</h3>
+                        <p class="text-blue-600 mb-3">CEO & Founder</p>
+                        <p class="text-gray-600 text-sm">Tech entrepreneur passionate about healthcare accessibility.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/85a8c29a-d39b-4b76-802a-fb47300e9027.png" alt="Dr. Michael Chen, Head of Telemedicine, young Asian doctor with glasses looking at camera" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Dr. Michael Chen</h3>
+                        <p class="text-blue-600 mb-3">Head of Telemedicine</p>
+                        <p class="text-gray-600 text-sm">Pioneer in digital healthcare solutions and remote diagnostics.</p>
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/12c75e25-996b-4719-9a93-1880c444de9b.png" alt="Priya Sharma, CTO, young Indian woman in tech attire standing in front of computer screens" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800">Priya Sharma</h3>
+                        <p class="text-blue-600 mb-3">Chief Technology Officer</p>
+                        <p class="text-gray-600 text-sm">AI and healthcare technology expert with multiple patents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Testimonial Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Patients Say</h2>
+                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="video-container rounded-lg shadow-xl overflow-hidden">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                
+                <div class="flex flex-col justify-center">
+                    <div class="testimonial-card active">
+                        <p class="text-gray-700 text-lg italic mb-6">"MediCare saved me hours of waiting at the clinic. The doctor was thorough and prescribed exactly what I needed. The medicine arrived at my doorstep the same day!"</p>
+                        <div class="flex items-center">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18d1068d-f1c1-4ca9-9f5c-d09c10d182da.png" alt="James Wilson, satisfied patient, middle-aged Caucasian man smiling" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold text-gray-800">James Wilson</h4>
+                                <p class="text-gray-600 text-sm">Patient since 2018</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mt-4">
+                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none active-nav"></button>
+                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none"></button>
+                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-blue-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Ready to Experience Better Healthcare?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">Join thousands of satisfied patients who trust MediCare for their healthcare needs.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300">Book an Appointment</a>
+                <a href="#" class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300">Download App</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/59a06536-fbfa-4830-80b3-f0b1aa42156b.png" alt="MediCare logo icon version" class="h-10">
+                        <span class="ml-3 text-xl font-bold">MediCare</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your trusted digital healthcare partner.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f1eb49fa-9603-4aa5-9350-82693290570e.png" alt="Facebook social media icon" class="h-8 w-8"></a>
+                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e3650c1-665f-42b9-a777-e26d08c53326.png" alt="Twitter social media icon" class="h-8 w-8"></a>
+                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18cc6099-e3ca-44f1-a07b-0e72b07ce220.png" alt="LinkedIn social media icon" class="h-8 w-8"></a>
+                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6db8d263-a1b5-4da3-8652-5d35d2e868a8.png" alt="Instagram social media icon" class="h-8 w-8"></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Doctors</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Video Consultation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Symptom Checker</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Medicine Delivery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Health Records</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Wellness Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                    <address class="text-gray-400 not-italic">
+                        <p class="mb-2">123 Health Street</p>
+                        <p class="mb-2">Medical District, NY 10001</p>
+                        <p class="mb-2">Phone: (123) 456-7890</p>
+                        <p class="mb-2">Email: info@medicare.com</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                <p>© 2023 MediCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Counter Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if(count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                updateCount();
+            });
+            
+            // Testimonial Navigation
+            const testimonialCards = document.querySelectorAll('.testimonial-card');
+            const navButtons = document.querySelectorAll('.testimonial-nav');
+            
+            if(navButtons.length > 0) {
+                navButtons.forEach((button, index) => {
+                    button.addEventListener('click', () => {
+                        // Remove active class from all
+                        testimonialCards.forEach(card => card.classList.remove('active'));
+                        navButtons.forEach(btn => btn.classList.remove('active-nav'));
+                        
+                        // Add active class to selected
+                        testimonialCards[index].classList.add('active');
+                        button.classList.add('active-nav');
+                    });
+                });
+            }
+            
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('button[class="md:hidden focus:outline-none"]');
+            if(mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => {
+                    const menu = document.querySelector('.hidden.md\\:flex.space-x-8');
+                    if(menu) {
+                        menu.classList.toggle('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
+
+
