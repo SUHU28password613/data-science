@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare+ | Advanced Healthcare Signup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --error: #ef4444;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        .progress-step {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .progress-step.active {
+            border-color: var(--primary);
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .progress-step.completed {
+            border-color: var(--secondary);
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .progress-connector {
+            flex: 1;
+            height: 2px;
+            background-color: #cbd5e1;
+        }
+        
+        .progress-connector.active {
+            background-color: var(--primary);
+        }
+        
+        .progress-connector.completed {
+            background-color: var(--secondary);
+        }
+        
+        .password-strength {
+            height: 4px;
+            transition: all 0.3s;
+        }
+        
+        #passwordMatchMessage, #passwordStrengthMessage {
+            font-size: 0.8rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--primary);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--primary);
+        }
+        
+        .document-preview {
+            max-height: 0;
+            opacity: 0;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+        
+        .document-preview.show {
+            max-height: 200px;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .progress-step {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="max-w-6xl w-full bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="md:flex">
+            <!-- Hero Section -->
+            <div class="md:w-1/2 bg-gradient-to-br from-blue-500 to-blue-700 p-8 text-white hidden md:flex flex-col justify-center">
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold mb-2">Medicare+</h1>
+                    <p class="text-blue-100">Advanced E-Healthcare Platform</p>
+                </div>
+                
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a373847b-567a-4725-ad96-b7bf46cee365.png" alt="Healthcare professional reviewing medical records on a tablet with a patient in a modern clinic setting" class="rounded-lg shadow-lg w-full" />
+                
+                <div class="mt-8">
+                    <h3 class="text-xl font-semibold mb-2">Why Join Medicare+?</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>AI-powered health insights</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Virtual consultations with specialists</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Secure medical records management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Personalized health tracking</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Form Section -->
+            <div class="md:w-1/2 p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">Create Your Account</h2>
+                    <p class="text-gray-600">Join our advanced healthcare platform</p>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <!-- Step 1 -->
+                            <div class="progress-step active" id="step1Indicator">1</div>
+                            <div class="progress-connector" id="connector1"></div>
+                            
+                            <!-- Step 2 -->
+                            <div class="progress-step" id="step2Indicator">2</div>
+                            <div class="progress-connector" id="connector2"></div>
+                            
+                            <!-- Step 3 -->
+                            <div class="progress-step" id="step3Indicator">3</div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mt-2">
+                        <span class="text-sm text-primary" id="step1Label">Personal Info</span>
+                        <span class="text-sm text-gray-500" id="step2Label">Health Details</span>
+                        <span class="text-sm text-gray-500" id="step3Label">Account Setup</span>
+                    </div>
+                </div>
+                
+                <form id="signupForm" class="space-y-4" novalidate>
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" id="step1">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="firstNameError">Please enter your first name</div>
+                            </div>
+                            
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="lastNameError">Please enter your last name</div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="emailError">Please enter a valid email address</div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    pattern="[0-9]{10}" title="Please enter a 10-digit phone number">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="phoneError">Please enter a valid phone number</div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="dob" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                                <input type="date" id="dob" name="dob" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    max="">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="dobError">Please select your date of birth</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Health Information -->
+                    <div class="form-step" id="step2">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label for="bloodType" class="block text-sm font-medium text-gray-700 mb-1">Blood Type</label>
+                                <select id="bloodType" name="bloodType"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="">Select Blood Type</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Do you have any allergies?</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="allergies[]" value="Pollen" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Pollen</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="allergies[]" value="Dust" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Dust</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="allergies[]" value="Nuts" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Nuts</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="allergies[]" value="Dairy" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Dairy</span>
+                                    </label>
+                                </div>
+                                <div class="mt-2">
+                                    <input type="text" id="otherAllergies" name="otherAllergies" placeholder="Other allergies"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Any existing medical conditions?</label>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="conditions[]" value="Diabetes" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Diabetes</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="conditions[]" value="Hypertension" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Hypertension</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="conditions[]" value="Asthma" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Asthma</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="conditions[]" value="Heart Disease" class="rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                                        <span class="ml-2">Heart Disease</span>
+                                    </label>
+                                </div>
+                                <div class="mt-2">
+                                    <input type="text" id="otherConditions" name="otherConditions" placeholder="Other conditions"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                </div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="medicalDocuments" class="block text-sm font-medium text-gray-700 mb-1">Upload Medical Documents (optional)</label>
+                                <div class="mt-1 flex items-center">
+                                    <label for="file-upload" class="cursor-pointer">
+                                        <span class="px-4 py-2 bg-blue-50 border border-blue-200 rounded-md text-blue-700 hover:bg-blue-100 inline-flex items-center">
+                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                            </svg>
+                                            Choose files
+                                        </span>
+                                        <input id="file-upload" name="medicalDocuments" type="file" class="sr-only" multiple>
+                                    </label>
+                                    <span id="file-selected" class="ml-2 text-sm text-gray-500">No files selected</span>
+                                </div>
+                                <div id="documentPreview" class="document-preview mt-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Account Setup -->
+                    <div class="form-step" id="step3">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <div class="flex justify-between items-center">
+                                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                                    <span class="text-xs text-gray-500" id="usernameStatus"></span>
+                                </div>
+                                <input type="text" id="username" name="username" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    pattern="[a-zA-Z0-9_]{4,20}" title="Username must be 4-20 characters and can only contain letters, numbers, and underscores">
+                                <div class="text-xs text-red-500 mt-1 hidden" id="usernameError">Invalid username format</div>
+                            </div>
+                            
+                            <div class="md:col-span-2 relative">
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                                <input type="password" id="password" name="password" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 characters">
+                                <div class="password-strength mt-2 bg-gray-200 rounded-full overflow-hidden">
+                                    <div id="passwordStrengthBar" class="h-full bg-gray-400 w-0"></div>
+                                </div>
+                                <div id="passwordStrengthMessage" class="text-xs mt-1">Password strength: <span class="font-medium">Weak</span></div>
+                                <div id="passwordRequirements" class="text-xs text-gray-500 mt-1">
+                                    Password must be at least 8 characters containing uppercase, lowercase, and numbers.
+                                </div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+                                <div id="passwordMatchMessage" class="text-xs mt-1"></div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="terms" name="terms" type="checkbox" required
+                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="terms" class="font-medium text-gray-700">I agree to the <a href="#" class="text-blue-600 hover:text-blue-500">Terms of Service</a> and <a href="#" class="text-blue-600 hover:text-blue-500">Privacy Policy</a></label>
+                                        <p class="text-gray-500">You agree to allow us to securely store your health information in accordance with HIPAA regulations.</p>
+                                    </div>
+                                </div>
+                                <div class="text-xs text-red-500 mt-1 hidden" id="termsError">You must accept the terms and conditions</div>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <div class="flex items-start">
+                                    <div class="flex items-center h-5">
+                                        <input id="newsletter" name="newsletter" type="checkbox"
+                                            class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                    </div>
+                                    <div class="ml-3 text-sm">
+                                        <label for="newsletter" class="font-medium text-gray-700">Subscribe to our newsletter</label>
+                                        <p class="text-gray-500">Get the latest healthcare tips and platform updates.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between pt-6">
+                        <button type="button" id="prevBtn" class="hidden px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            Previous
+                        </button>
+                        
+                        <button type="button" id="nextBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 ml-auto">
+                            Next
+                        </button>
+                        
+                        <button type="submit" id="submitBtn" class="hidden px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 ml-auto">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set max date for date of birth (18 years ago)
+            const today = new Date();
+            const maxDate = new Date();
+            maxDate.setFullYear(today.getFullYear() - 18);
+            document.getElementById('dob').max = maxDate.toISOString().split('T')[0];
+            
+            // DOM elements
+            const form = document.getElementById('signupForm');
+            const steps = document.querySelectorAll('.form-step');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            let currentStep = 0;
+            
+            // File upload preview
+            const fileUpload = document.getElementById('file-upload');
+            const fileSelected = document.getElementById('file-selected');
+            const documentPreview = document.getElementById('documentPreview');
+            
+            fileUpload.addEventListener('change', function(e) {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    fileSelected.textContent = `${files.length} file(s) selected`;
+                    documentPreview.innerHTML = '';
+                    
+                    Array.from(files).forEach(file => {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            if (file.type.startsWith('image/')) {
+                                const img = document.createElement('img');
+                                img.src = e.target.result;
+                                img.alt = 'Preview of medical document: ' + file.name;
+                                img.className = 'h-40 object-contain border p-1 mb-2 mr-2 rounded-md inline-block';
+                                documentPreview.appendChild(img);
+                            } else if (file.type === 'application/pdf') {
+                                const div = document.createElement('div');
+                                div.className = 'inline-flex items-center bg-gray-100 border p-1 mb-2 mr-2 rounded-md';
+                                div.innerHTML = `
+                                    <svg class="w-8 h-8 text-red-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-sm">${file.name}</span>
+                                `;
+                                documentPreview.appendChild(div);
+                            } else {
+                                const div = document.createElement('div');
+                                div.className = 'inline-flex items-center bg-gray-100 border p-1 mb-2 mr-2 rounded-md';
+                                div.innerHTML = `
+                                    <svg class="w-8 h-8 text-gray-500 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="text-sm">${file.name}</span>
+                                `;
+                                documentPreview.appendChild(div);
+                            }
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                    
+                    documentPreview.classList.add('show');
+                } else {
+                    fileSelected.textContent = 'No files selected';
+                    documentPreview.classList.remove('show');
+                }
+            });
+            
+            // Password strength meter
+            const password = document.getElementById('password');
+            const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+            const passwordStrengthMessage = document.getElementById('passwordStrengthMessage').querySelector('span');
+            
+            password.addEventListener('input', function() {
+                const strength = calculatePasswordStrength(this.value);
+                passwordStrengthBar.style.width = `${strength.percentage}%`;
+                passwordStrengthBar.className = `h-full ${strength.color} w-0 transition-all duration-300`;
+                passwordStrengthMessage.textContent = strength.text;
+                passwordStrengthMessage.className = strength.class;
+            });
+            
+            function calculatePasswordStrength(password) {
+                let strength = 0;
+                // Length check
+                if (password.length > 7) strength++;
+                if (password.length > 11) strength++;
+                // Has uppercase letters
+                if (/[A-Z]/.test(password)) strength++;
+                // Has lowercase letters
+                if (/[a-z]/.test(password)) strength++;
+                // Has numbers
+                if (/[0-9]/.test(password)) strength++;
+                // Has special chars
+                if (/[^A-Za-z0-9]/.test(password)) strength++;
+                
+                // Calculate percentage
+                const percentage = Math.min(100, (strength / 6) * 100);
+                
+                // Return result based on strength
+                if (percentage < 40) {
+                    return { 
+                        percentage, 
+                        color: 'bg-red-500', 
+                        text: 'Weak', 
+                        class: 'text-red-500 font-medium'
+                    };
+                } else if (percentage < 70) {
+                    return { 
+                        percentage, 
+                        color: 'bg-yellow-500', 
+                        text: 'Medium', 
+                        class: 'text-yellow-500 font-medium'
+                    };
+                } else {
+                    return { 
+                        percentage, 
+                        color: 'bg-green-500', 
+                        text: 'Strong', 
+                        class: 'text-green-500 font-medium'
+                    };
+                }
+            }
+            
+            // Password confirmation check
+            const confirmPassword = document.getElementById('confirmPassword');
+            const passwordMatchMessage = document.getElementById('passwordMatchMessage');
+            
+            confirmPassword.addEventListener('input', function() {
+                if (this.value && password.value) {
+                    if (this.value === password.value) {
+                        passwordMatchMessage.innerHTML = '<span class="text-green-500">Passwords match!</span>';
+                    } else {
+                        passwordMatchMessage.innerHTML = '<span class="text-red-500">Passwords do not match</span>';
+                    }
+                } else {
+                    passwordMatchMessage.textContent = '';
+                }
+            });
+            
+            // Username availability check (simulated)
+            const username = document.getElementById('username');
+            const usernameStatus = document.getElementById('usernameStatus');
+            
+            username.addEventListener('blur', function() {
+                if (this.value.length >= 4 && this.value.length <= 20) {
+                    // Simulate checking username availability
+                    setTimeout(() => {
+                        if (/^test|admin$/i.test(this.value)) {
+                            usernameStatus.innerHTML = '<span class="text-red-500">Username not available</span>';
+                        } else {
+                            usernameStatus.innerHTML = '<span class="text-green-500">Username available</span>';
+                        }
+                    }, 500);
+                }
+            });
+            
+            // Form navigation
+            nextBtn.addEventListener('click', function() {
+                if (validateStep(currentStep)) {
+                    showStep(currentStep + 1);
+                }
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                showStep(currentStep - 1);
+            });
+            
+            // Initialize first step
+            showStep(currentStep);
+            
+            function showStep(step) {
+                // Hide all steps
+                steps.forEach((stepElement, index) => {
+                    stepElement.classList.remove('active');
+                    
+                    // Update progress indicators
+                    const stepConnector = document.getElementById(`connector${index}`);
+                    const stepIndicator = document.getElementById(`step${index + 1}Indicator`);
+                    const stepLabel = document.getElementById(`step${index + 1}Label`);
+                    
+                    if (index < step) {
+                        // Steps before current - completed
+                        if (stepConnector) stepConnector.classList.add('completed');
+                        if (stepIndicator) stepIndicator.classList.add('completed');
+                        stepLabel.classList.remove('text-gray-500');
+                        stepLabel.classList.add('text-green-500');
+                    } else if (index === step) {
+                        // Current step - active
+                        if (stepConnector) stepConnector.classList.remove('completed', 'active');
+                        if (stepConnector && step > 0) stepConnector.classList.add('completed');
+                        if (stepIndicator) stepIndicator.classList.add('active');
+                        stepLabel.classList.remove('text-gray-500', 'text-green-500');
+                        stepLabel.classList.add('text-blue-500');
+                    } else {
+                        // Steps after current - inactive
+                        if (stepConnector) stepConnector.classList.remove('completed', 'active');
+                        if (stepIndicator) stepIndicator.classList.remove('active', 'completed');
+                        stepLabel.classList.remove('text-blue-500', 'text-green-500');
+                        stepLabel.classList.add('text-gray-500');
+                    }
+                });
+                
+                // Show current step
+                steps[step].classList.add('active');
+                currentStep = step;
+                
+                // Update navigation buttons
+                if (step === 0) {
+                    prevBtn.classList.add('hidden');
+                } else {
+                    prevBtn.classList.remove('hidden');
+                }
+                
+                if (step === steps.length - 1) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                }
+            }
+            
+            function validateStep(step) {
+                let isValid = true;
+                
+                if (step === 0) {
+                    // Validate personal info step
+                    const firstName = document.getElementById('firstName');
+                    const lastName = document.getElementById('lastName');
+                    const email = document.getElementById('email');
+                    const phone = document.getElementById('phone');
+                    const dob = document.getElementById('dob');
+                    
+                    if (!firstName.value) {
+                        document.getElementById('firstNameError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('firstNameError').classList.add('hidden');
+                    }
+                    
+                    if (!lastName.value) {
+                        document.getElementById('lastNameError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('lastNameError').classList.add('hidden');
+                    }
+                    
+                    if (!email.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+                        document.getElementById('emailError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('emailError').classList.add('hidden');
+                    }
+                    
+                    if (!phone.value || !/^\d{10}$/.test(phone.value)) {
+                        document.getElementById('phoneError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('phoneError').classList.add('hidden');
+                    }
+                    
+                    if (!dob.value) {
+                        document.getElementById('dobError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('dobError').classList.add('hidden');
+                    }
+                } else if (step === 2) {
+                    // Validate account setup step
+                    const username = document.getElementById('username');
+                    const password = document.getElementById('password');
+                    const confirmPassword = document.getElementById('confirmPassword');
+                    const terms = document.getElementById('terms');
+                    
+                    if (!username.value || !/^[a-zA-Z0-9_]{4,20}$/.test(username.value)) {
+                        document.getElementById('usernameError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('usernameError').classList.add('hidden');
+                    }
+                    
+                    if (!password.value || !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(password.value)) {
+                        isValid = false;
+                    }
+                    
+                    if (password.value !== confirmPassword.value) {
+                        isValid = false;
+                    }
+                    
+                    if (!terms.checked) {
+                        document.getElementById('termsError').classList.remove('hidden');
+                        isValid = false;
+                    } else {
+                        document.getElementById('termsError').classList.add('hidden');
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateStep(currentStep)) {
+                    // Simulate form submission
+                    console.log('Form submitted successfully');
+                    alert('Account created successfully! Welcome to Medicare+.');
+                    
+                    // Here you would typically send the form data to a server
+                    // const formData = new FormData(form);
+                    // fetch('/api/signup', { method: 'POST', body: formData })
+                    //     .then(response => response.json())
+                    //     .then(data => console.log('Success:', data))
+                    //     .catch(error => console.error('Error:', error));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

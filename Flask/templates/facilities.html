@@ -3,879 +3,696 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedCare - Our Facilities</title>
+    <title>MEDICARE+ - Frequently Asked Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #005f73;
-            --secondary: #0a9396;
-            --accent: #94d2bd;
-            --light: #e9d8a6;
-            --highlight: #ee9b00;
-            --dark: #001219;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary: #3b82f6;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
         }
         
         body {
-            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f7ff;
             color: var(--dark);
-            line-height: 1.6;
         }
         
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1) 0%, rgba(16,185,129,0.1) 100%);
         }
         
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
-            color: var(--highlight);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
+        .faq-card {
             transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .faq-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion.active .accordion-content {
+            max-height: 500px;
+        }
+        
+        .video-container {
             position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
         }
         
-        .nav-links a:hover {
-            color: var(--highlight);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--highlight);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .hero {
-            background: url('https://placehold.co/1920x800') center/cover no-repeat;
-            height: 60vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            color: white;
-        }
-        
-        .hero::before {
-            content: '';
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
         }
         
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
+        .search-box {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--highlight);
-            color: white;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            margin-left: 1rem;
-        }
-        
-        .btn-outline:hover {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin: 4rem 0 2rem;
-            font-size: 2.5rem;
-            color: var(--primary);
+        .tooltip {
             position: relative;
         }
         
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: var(--highlight);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .facilities {
-            padding: 3rem 0;
-        }
-        
-        .facilities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .facility-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .facility-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .facility-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .facility-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .facility-card:hover .facility-img img {
-            transform: scale(1.1);
-        }
-        
-        .facility-content {
-            padding: 1.5rem;
-        }
-        
-        .facility-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .facility-content p {
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-        
-        .facility-icon {
-            font-size: 2.5rem;
-            color: var(--highlight);
-            margin-bottom: 1rem;
-        }
-        
-        .special-features {
-            background: linear-gradient(135deg, #f0f7fa, #e6f0f2);
-            padding: 4rem 0;
-            margin: 4rem 0;
-        }
-        
-        .features-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-        
-        .feature-box {
-            flex: 1 1 300px;
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-        }
-        
-        .feature-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .feature-box p {
-            color: #666;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            padding: 4rem 0;
-            margin: 4rem 0;
-        }
-        
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .cta-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-content p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .testimonials {
-            padding: 4rem 0;
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .testimonial-slide {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: none;
-        }
-        
-        .testimonial-slide.active {
-            display: block;
-            animation: fadeIn 1s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .testimonial-content {
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #555;
-        }
-        
-        .testimonial-author {
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .testimonial-role {
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        .testimonial-nav {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-        
-        .testimonial-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ccc;
-            margin: 0 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-dot.active {
-            background: var(--primary);
-            transform: scale(1.2);
-        }
-        
-        footer {
+        .tooltip-text {
+            visibility: hidden;
+            width: 200px;
             background-color: var(--dark);
             color: white;
-            padding: 3rem 0 1rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background: var(--highlight);
-            bottom: -8px;
-            left: 0;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--highlight);
-            padding-left: 5px;
-        }
-        
-        .social-links {
-            display: flex;
-            margin-top: 1.5rem;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            margin-right: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--highlight);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
             text-align: center;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
-            font-size: 0.9rem;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 80%;
-                height: 100vh;
-                background: var(--dark);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.5s ease;
-                z-index: 1000;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 1.5rem 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                z-index: 1001;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .btn {
-                display: block;
-                margin: 0 auto 1rem;
-                width: 80%;
-            }
-            
-            .btn-outline {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .feature-box {
-                flex: 1 1 100%;
-            }
-            
-            .cta-content h2 {
-                font-size: 2rem;
-            }
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo"><i class="fas fa-heartbeat"></i>MedCare</a>
-                <ul class="nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#" class="active">Facilities</a></li>
-                    <li><a href="#">Doctors</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
-            </nav>
+    <!-- Header Section -->
+    <header class="gradient-bg py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <img src="https://placehold.co/50x50" alt="MEDICARE+ logo - blue cross symbol with plus sign" class="w-10 h-10">
+                    <h1 class="text-2xl font-bold text-blue-600">MEDICARE<span class="text-emerald-500">+</span></h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="font-medium hover:text-blue-600">Home</a>
+                    <a href="#" class="font-medium hover:text-blue-600">Services</a>
+                    <a href="#" class="font-medium hover:text-blue-600">Doctors</a>
+                    <a href="#" class="font-medium text-blue-600 font-semibold">FAQs</a>
+                    <a href="#" class="font-medium hover:text-blue-600">Contact</a>
+                </nav>
+                <button class="md:hidden text-blue-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content container">
-            <h1>World-Class Healthcare Facilities</h1>
-            <p>Experience cutting-edge medical technology and compassionate care in our state-of-the-art facilities designed for your wellbeing.</p>
-            <a href="#facilities" class="btn">Explore Facilities</a>
-            <a href="#" class="btn btn-outline">Book Appointment</a>
-        </div>
-    </section>
-
-    <section id="facilities" class="facilities">
-        <div class="container">
-            <h2 class="section-title">Our Medical Facilities</h2>
-            <div class="facilities-grid">
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Modern operating room with advanced surgical equipment and LED lighting">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-procedures"></i>
-                        </div>
-                        <h3>Advanced Surgical Suites</h3>
-                        <p>Our operating rooms feature the latest minimally invasive surgical technology with robotic assistance and 4K imaging systems for precise procedures.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+    <!-- Hero Section -->
+    <section class="gradient-bg py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">Frequently Asked Questions</h2>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">Find answers to common questions about our MEDICARE+ telehealth services, insurance coverage, appointments, and more.</p>
+            
+            <!-- Search Box -->
+            <div class="mt-8 max-w-2xl mx-auto">
+                <div class="relative search-box rounded-full bg-white">
+                    <input type="text" placeholder="Search FAQs..." class="w-full py-4 px-6 rounded-full focus:outline-none">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
-
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Neonatal intensive care unit with incubators and monitoring equipment">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-baby"></i>
-                        </div>
-                        <h3>Neonatal Intensive Care</h3>
-                        <p>Level III NICU providing specialized care for premature and critically ill newborns with advanced monitoring and life support systems.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Diagnostic imaging center with MRI and CT scanning equipment">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-x-ray"></i>
-                        </div>
-                        <h3>Diagnostic Imaging Center</h3>
-                        <p>Comprehensive imaging services including 3T MRI, 64-slice CT, digital mammography, ultrasound, and fluoroscopy with low radiation technology.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Cardiac catheterization lab with advanced monitoring equipment">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-heartbeat"></i>
-                        </div>
-                        <h3>Cardiac Care Unit</h3>
-                        <p>State-of-the-art cardiac catheterization labs and dedicated cardiac ICU for comprehensive heart care and interventions.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Physical therapy gym with exercise equipment and rehabilitation tools">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-wheelchair"></i>
-                        </div>
-                        <h3>Rehabilitation Center</h3>
-                        <p>Comprehensive physical, occupational, and speech therapy programs with aquatic therapy pool and advanced rehabilitation technology.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-
-                <div class="facility-card">
-                    <div class="facility-img">
-                        <img src="https://placehold.co/800x500" alt="Modern emergency room with trauma bays and emergency equipment">
-                    </div>
-                    <div class="facility-content">
-                        <div class="facility-icon">
-                            <i class="fas fa-ambulance"></i>
-                        </div>
-                        <h3>Emergency & Trauma Center</h3>
-                        <p>24/7 emergency services with dedicated trauma bays, pediatric emergency area, and rapid assessment zones for immediate care.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
+                <div class="mt-4 flex flex-wrap justify-center gap-2">
+                    <span class="text-sm text-slate-500">Popular searches:</span>
+                    <a href="#privacy" class="text-sm text-blue-600 hover:underline">Privacy Policy</a>
+                    <span class="text-sm text-slate-300">•</span>
+                    <a href="#prescriptions" class="text-sm text-blue-600 hover:underline">Prescriptions</a>
+                    <span class="text-sm text-slate-300">•</span>
+                    <a href="#insurance" class="text-sm text-blue-600 hover:underline">Insurance</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="special-features">
-        <div class="container">
-            <h2 class="section-title">Our Special Features</h2>
-            <div class="features-container">
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- FAQ Categories Sidebar -->
+            <aside class="lg:w-1/4">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-8">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="flex items-center justify-between font-medium text-blue-600">
+                            <span>General</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-600">
+                            <span>Account & Login</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-600">
+                            <span>Appointments</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#insurance" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-600">
+                            <span>Insurance</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#prescriptions" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-700">
+                            <span>Prescriptions</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#privacy" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-600">
+                            <span>Privacy & Security</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                        <li><a href="#" class="flex items-center justify-between font-medium text-slate-700 hover:text-blue-600">
+                            <span>Technical Support</span>
+                            <i class="fas fa-chevron-right text-xs"></i>
+                        </a></li>
+                    </ul>
+                    
+                    <div class="mt-8 pt-6 border-t border-slate-200">
+                        <h4 class="font-medium mb-3">Need more help?</h4>
+                        <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-headset"></i> Contact Support
+                        </button>
                     </div>
-                    <h3>Infection Control</h3>
-                    <p>Advanced air filtration systems and rigorous disinfection protocols to ensure patient safety and prevent hospital-acquired infections.</p>
+                </div>
+            </aside>
+
+            <!-- FAQ Content -->
+            <div class="lg:w-3/4">
+                <!-- Featured Video -->
+                <div class="mb-12">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">Getting Started with MEDICARE+</h3>
+                    <div class="video-container rounded-xl overflow-hidden shadow-lg">
+                        <iframe src="https://www.youtube.com/embed/7jD5GchkYCw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-3 text-slate-500">Watch our 3-minute tutorial on how to use MEDICARE+ for virtual consultations.</p>
                 </div>
 
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <i class="fas-robot"></i>
+                <!-- Main FAQ Section -->
+                <section id="general" class="mb-12">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-6 flex items-center gap-2">
+                        <i class="fas fa-question-circle"></i> General Questions
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 1 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">What is MEDICARE+?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>MEDICARE+ is a comprehensive telehealth platform that connects patients with healthcare providers remotely. Our services include virtual consultations, electronic prescriptions, health monitoring, and access to your medical records from anywhere.</p>
+                                <div class="mt-4 flex flex-wrap gap-4">
+                                    <div class="w-full md:w-[48%]">
+                                        <img src="https://placehold.co/600x400" alt="Doctor consulting with patient via video call on laptop" class="rounded-lg w-full">
+                                    </div>
+                                    <div class="w-full md:w-[48%]">
+                                        <img src="https://placehold.co/600x400" alt="Mobile app interface showing health metrics and appointment scheduling" class="rounded-lg w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">How do I sign up for MEDICARE+?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>You can sign up in three simple steps:</p>
+                                <ol class="list-decimal pl-5 space-y-2 mt-2">
+                                    <li>Visit our website and click "Sign Up"</li>
+                                    <li>Complete your profile information</li>
+                                    <li>Verify your email and identity</li>
+                                </ol>
+                                <div class="mt-4 bg-blue-50 p-4 rounded-lg flex items-start gap-3">
+                                    <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                                    <p><span class="font-semibold">Note:</span> Some insurance providers require additional verification steps depending on your coverage.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 3 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">What devices are supported?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>MEDICARE+ is compatible with:</p>
+                                <ul class="list-disc pl-5 space-y-2 mt-2">
+                                    <li>Windows PCs (Chrome, Edge, Firefox)</li>
+                                    <li>Mac computers (Safari, Chrome)</li>
+                                    <li>Android smartphones and tablets (latest OS versions)</li>
+                                    <li>iPhones and iPads (iOS 14+)</li>
+                                </ul>
+                                <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                    <div class="tooltip">
+                                        <div class="p-3 rounded-lg bg-slate-50">
+                                            <i class="fab fa-windows text-3xl text-blue-500"></i>
+                                        </div>
+                                        <span class="tooltip-text">Windows PC Support</span>
+                                    </div>
+                                    <div class="tooltip">
+                                        <div class="p-3 rounded-lg bg-slate-50">
+                                            <i class="fab fa-apple text-3xl text-slate-600"></i>
+                                        </div>
+                                        <span class="tooltip-text">Apple/Mac Support</span>
+                                    </div>
+                                    <div class="tooltip">
+                                        <div class="p-3 rounded-lg bg-slate-50">
+                                            <i class="fab fa-android text-3xl text-emerald-500"></i>
+                                        </div>
+                                        <span class="tooltip-text">Android Support</span>
+                                    </div>
+                                    <div class="tooltip">
+                                        <div class="p-3 rounded-lg bg-slate-50">
+                                            <i class="fab fa-chrome text-3xl text-red-500"></i>
+                                        </div>
+                                        <span class="tooltip-text">Browser Support</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Robotic Surgery</h3>
-                    <p>Precision-guided robotic-assisted surgery for complex procedures with minimal scarring and faster recovery times.</p>
-                </div>
+                </section>
 
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <i class="fas fa-brain"></i>
+                <!-- Insurance Section -->
+                <section id="insurance" class="mb-12">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-6 flex items-center gap-2">
+                        <i class="fas fa-shield-alt"></i> Insurance Questions
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 4 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">What insurance plans do you accept?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>MEDICARE+ accepts most major insurance plans including:</p>
+                                <div class="mt-3 flex flex-wrap gap-4">
+                                    <div class="bg-blue-50 px-3 py-2 rounded-lg flex items-center gap-2">
+                                        <img src="https://placehold.co/30x20" alt="Blue Cross Blue Shield logo" class="h-5">
+                                        <span>Blue Cross Blue Shield</span>
+                                    </div>
+                                    <div class="bg-blue-50 px-3 py-2 rounded-lg flex items-center gap-2">
+                                        <img src="https://placehold.co/30x20" alt="Aetna logo" class="h-5">
+                                        <span>Aetna</span>
+                                    </div>
+                                    <div class="bg-blue-50 px-3 py-2 rounded-lg flex items-center gap-2">
+                                        <img src="https://placehold.co/30x20" alt="UnitedHealthcare logo" class="h-5">
+                                        <span>UnitedHealthcare</span>
+                                    </div>
+                                    <div class="bg-blue-50 px-3 py-2 rounded-lg flex items-center gap-2">
+                                        <img src="https://placehold.co/30x20" alt="Medicare logo" class="h-5">
+                                        <span>Medicare</span>
+                                    </div>
+                                </div>
+                                <p class="mt-4">We also accept Medicaid in participating states. Check our coverage tool to verify your specific plan.</p>
+                                <button class="mt-4 bg-emerald-500 text-white py-2 px-4 rounded-lg hover:bg-emerald-600 transition flex items-center gap-2">
+                                    <i class="fas fa-check-circle"></i> Check Coverage Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 5 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">How do I change my insurance information?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>To update your insurance information:</p>
+                                <ol class="list-decimal pl-5 space-y-2 mt-2">
+                                    <li>Log in to your MEDICARE+ account</li>
+                                    <li>Navigate to "Profile Settings"</li>
+                                    <li>Select "Insurance Information"</li>
+                                    <li>Upload a clear image of your insurance card (front and back)</li>
+                                    <li>Our system will automatically verify your coverage</li>
+                                </ol>
+                                <div class="mt-4 bg-yellow-50 p-4 rounded-lg flex items-start gap-3 border-l-4 border-yellow-400">
+                                    <i class="fas fa-exclamation-circle text-yellow-600 mt-1"></i>
+                                    <p><span class="font-semibold">Important:</span> Changing insurance may affect appointment availability and copay amounts.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Neurology Center</h3>
-                    <p>Comprehensive neurologic care including stroke intervention, epilepsy monitoring, and movement disorder treatments.</p>
-                </div>
+                </section>
 
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
+                <!-- Prescriptions Section -->
+                <section id="prescriptions" class="mb-12">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-6 flex items-center gap-2">
+                        <i class="fas fa-prescription-bottle-alt"></i> Prescription Questions
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 6 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">Can I get prescriptions through MEDICARE+?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>Yes! Our licensed healthcare providers can electronically prescribe medications when clinically appropriate. Here's how it works:</p>
+                                <div class="mt-4 flex flex-col md:flex-row gap-6">
+                                    <div class="flex-1">
+                                        <div class="bg-blue-50 p-4 rounded-lg h-full">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <div class="bg-blue-100 p-2 rounded-full">
+                                                    <i class="fas fa-user-md text-blue-600"></i>
+                                                </div>
+                                                <h5 class="font-semibold">Provider Consultation</h5>
+                                            </div>
+                                            <p class="text-sm">Complete a virtual visit with one of our healthcare providers who can assess your needs.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="bg-emerald-50 p-4 rounded-lg h-full">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <div class="bg-emerald-100 p-2 rounded-full">
+                                                    <i class="fas fa-file-prescription text-emerald-600"></i>
+                                                </div>
+                                                <h5 class="font-semibold">E-Prescription</h5>
+                                            </div>
+                                            <p class="text-sm">If needed, your provider will electronically send the prescription to your preferred pharmacy.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="bg-purple-50 p-4 rounded-lg h-full">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <div class="bg-purple-100 p-2 rounded-full">
+                                                    <i class="fas fa-pills text-purple-600"></i>
+                                                </div>
+                                                <h5 class="font-semibold">Pharmacy Pickup</h5>
+                                            </div>
+                                            <p class="text-sm">You'll receive a notification when your prescription is ready for pickup or delivery.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 bg-blue-50 p-4 rounded-lg flex items-start gap-3">
+                                    <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                                    <p>Note: Controlled substances may require additional verification steps per state regulations.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 7 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">How do I transfer existing prescriptions to MEDICARE+?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>Transferring prescriptions is simple:</p>
+                                <ol class="list-decimal pl-5 space-y-2 mt-2">
+                                    <li>Request your current pharmacy to transfer prescriptions to your new preferred pharmacy</li>
+                                    <li>Inform your MEDICARE+ provider during your appointment</li>
+                                    <li>We'll automatically sync with your pharmacy records</li>
+                                </ol>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <div class="flex-1">
+                                        <img src="https://placehold.co/600x400" alt="Pharmacist reviewing prescription transfer request at computer" class="rounded-lg w-full">
+                                    </div>
+                                    <div class="flex-1">
+                                        <img src="https://placehold.co/600x400" alt="Patient receiving notification about transferred prescription on smartphone" class="rounded-lg w-full">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Healing Environment</h3>
-                    <p>Patient-centered design with natural light, healing gardens, and noise-reduction features to promote recovery.</p>
-                </div>
+                </section>
+
+                <!-- Privacy Section -->
+                <section id="privacy" class="mb-12">
+                    <h3 class="text-2xl font-bold text-blue-600 mb-6 flex items-center gap-2">
+                        <i class="fas fa-lock"></i> Privacy & Security Questions
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <!-- FAQ Item 8 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">How does MEDICARE+ protect my health data?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>We use enterprise-grade security measures compliant with:</p>
+                                <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-shield-alt text-blue-600"></i>
+                                        </div>
+                                        <span>HIPAA Compliance</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-database text-blue-600"></i>
+                                        </div>
+                                        <span>End-to-End Encryption</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-fingerprint text-blue-600"></i>
+                                        </div>
+                                        <span>Biometric Authentication</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-server text-blue-600"></i>
+                                        </div>
+                                        <span>SOC 2 Type II Certified</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-user-shield text-blue-600"></i>
+                                        </div>
+                                        <span>Zero-Trust Architecture</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-lg flex items-center gap-3">
+                                        <div class="bg-blue-100 p-2 rounded-full">
+                                            <i class="fas fa-clock text-blue-600"></i>
+                                        </div>
+                                        <span>24/7 Monitoring</span>
+                                    </div>
+                                </div>
+                                <p class="mt-4">Your health data is encrypted both in transit and at rest, with strict access controls that limit who can view your information.</p>
+                                <button class="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+                                    <i class="fas fa-file-alt"></i> View Our Privacy Policy
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 9 -->
+                        <div class="accordion faq-card bg-white rounded-xl p-6 cursor-pointer">
+                            <div class="flex justify-between items-center">
+                                <h4 class="font-semibold text-lg">Can family members access my account?</h4>
+                                <i class="fas fa-chevron-down accordion-icon text-blue-600"></i>
+                            </div>
+                            <div class="accordion-content mt-3 text-slate-600">
+                                <p>For adults (18+), account access is strictly limited to the individual unless you specifically grant access to:</p>
+                                <ul class="list-disc pl-5 space-y-2 mt-2">
+                                    <li>Authorized caregivers (requires verification)</li>
+                                    <li>Healthcare proxies (with legal documentation)</li>
+                                    <li>Family members through our Family Sharing feature (optional)</li>
+                                </ul>
+                                <div class="mt-4 bg-blue-50 p-4 rounded-lg flex items-start gap-3">
+                                    <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                                    <p>For minors, parent/guardian access is automatically enabled and can be managed through the Family Portal.</p>
+                                </div>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <img src="https://placehold.co/600x400" alt="Family members accessing shared health records through secure portal" class="rounded-lg w-full">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Didn't Find Answer Section -->
+                <section class="bg-white rounded-xl shadow-md p-8 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="bg-blue-100 p-4 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope text-blue-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-blue-600 mb-3">Still need help?</h3>
+                        <p class="text-slate-600 mb-6">Our support team is available 24/7 to answer your questions.</p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-comment-alt"></i> Live Chat
+                            </button>
+                            <button class="border border-blue-600 text-blue-600 py-3 px-6 rounded-lg hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-phone-alt"></i> Call Support
+                            </button>
+                            <button class="border border-blue-600 text-blue-600 py-3 px-6 rounded-lg hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                                <i class="fas fa-envelope"></i> Email Us
+                            </button>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
-    </section>
+    </main>
 
-    <section class="cta-section">
-        <div class="cta-content container">
-            <h2>Ready to Experience Our World-Class Facilities?</h2>
-            <p>Schedule an appointment today and let our caring team guide you through your healthcare journey.</p>
-            <a href="#" class="btn">Book Appointment</a>
-            <a href="#" class="btn btn-outline">Virtual Tour</a>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Patient Experiences</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-slide active">
-                    <div class="testimonial-content">
-                        "The cardiac care I received was exceptional. The facilities were modern and the staff was incredibly attentive to my needs throughout my treatment."
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="https://placehold.co/40x40" alt="MEDICARE+ logo - blue cross symbol" class="w-8 h-8">
+                        <h4 class="text-xl font-bold">MEDICARE<span class="text-emerald-400">+</span></h4>
                     </div>
-                    <div class="testimonial-author">Robert Johnson</div>
-                    <div class="testimonial-role">Cardiac Patient</div>
+                    <p class="text-slate-400">Your trusted partner in accessible, affordable telehealth services.</p>
                 </div>
-
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        "As a new mother, I was nervous about delivery, but the maternity ward made me feel completely comfortable with their beautiful facilities and caring team."
-                    </div>
-                    <div class="testimonial-author">Sarah Williams</div>
-                    <div class="testimonial-role">Maternity Patient</div>
-                </div>
-
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        "After my knee replacement, the rehabilitation center helped me regain mobility faster than I expected. The equipment was top-notch and the therapists were wonderful."
-                    </div>
-                    <div class="testimonial-author">Michael Chen</div>
-                    <div class="testimonial-role">Rehabilitation Patient</div>
-                </div>
-
-                <div class="testimonial-nav">
-                    <div class="testimonial-dot active" data-slide="0"></div>
-                    <div class="testimonial-dot" data-slide="1"></div>
-                    <div class="testimonial-dot" data-slide="2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>MedCare</h3>
-                    <p>Delivering compassionate healthcare with cutting-edge technology for better patient outcomes.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Facilities</a></li>
-                        <li><a href="#">Doctors</a></li>
+                <div>
+                    <h5 class="font-semibold text-lg mb-4">Quick Links</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Services</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Find a Doctor</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-column">
-                    <h3>Facilities</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Surgical Center</a></li>
-                        <li><a href="#">Cardiac Care</a></li>
-                        <li><a href="#">Maternity Ward</a></li>
-                        <li><a href="#">Emergency Care</a></li>
-                        <li><a href="#">Diagnostic Imaging</a></li>
+                <div>
+                    <h5 class="font-semibold text-lg mb-4">Legal</h5>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">HIPAA Compliance</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition">Accessibility</a></li>
                     </ul>
                 </div>
-
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Health St, Medical City</li>
-                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> info@medcare.com</li>
-                        <li><i class="fas fa-clock"></i> 24/7 Emergency</li>
-                    </ul>
+                <div>
+                    <h5 class="font-semibold text-lg mb-4">Connect With Us</h5>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-blue-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-blue-400 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-pink-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-red-600 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-slate-400">Download our app:</p>
+                    <div class="flex space-x-3 mt-3">
+                        <a href="#">
+                            <img src="https://placehold.co/120x40" alt="Download on the App Store badge" class="h-10">
+                        </a>
+                        <a href="#">
+                            <img src="https://placehold.co/135x40" alt="Get it on Google Play badge" class="h-10">
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2023 MedCare Healthcare. All rights reserved.</p>
+            <div class="border-t border-slate-700 mt-8 pt-8 text-center text-slate-400">
+                <p>&copy; 2023 MEDICARE+. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        // Accordion functionality
+        document.querySelectorAll('.accordion').forEach(item => {
+            const header = item.querySelector('h4').parentElement;
+            const icon = item.querySelector('.accordion-icon');
+            
+            header.addEventListener('click', () => {
+                item.classList.toggle('active');
+                icon.classList.toggle('rotate-180');
+            });
         });
 
-        // Smooth Scrolling for navigation links
+        // Search functionality
+        document.querySelector('.search-box button').addEventListener('click', () => {
+            const query = document.querySelector('.search-box input').value.toLowerCase();
+            const faqItems = document.querySelectorAll('.accordion');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('h4').textContent.toLowerCase();
+                const answer = item.querySelector('.accordion-content').textContent.toLowerCase();
+                
+                if (question.includes(query) || answer.includes(query)) {
+                    item.style.display = 'block';
+                    // Open matching items
+                    if (!item.classList.contains('active')) {
+                        item.classList.add('active');
+                        item.querySelector('.accordion-content').style.maxHeight = '500px';
+                        item.querySelector('.accordion-icon').classList.add('rotate-180');
+                    }
+                    // Highlight text
+                    const mark = document.createElement('mark');
+                    mark.textContent = query;
+                    mark.style.backgroundColor = 'rgba(59, 130, 246, 0.2)';
+                    if (question.includes(query)) {
+                        item.querySelector('h4').innerHTML = item.querySelector('h4').textContent.replace(new RegExp(query, 'gi'), match => `<mark style="background-color: rgba(59, 130, 246, 0.2);">${match}</mark>`);
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // FAQ category navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 
                 const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
+                if (targetId === '#') return;
                 
                 const targetElement = document.querySelector(targetId);
-                if(targetElement) {
+                if (targetElement) {
                     window.scrollTo({
                         top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                     
-                    // Close mobile menu if open
-                    if(navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    // Highlight category
+                    document.querySelectorAll('aside a').forEach(link => {
+                        link.classList.remove('text-blue-600');
+                        link.classList.add('text-slate-700', 'hover:text-blue-600');
+                    });
+                    const correspondingLink = document.querySelector(`aside a[href="${targetId}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.remove('text-slate-700', 'hover:text-blue-600');
+                        correspondingLink.classList.add('text-blue-600');
                     }
                 }
             });
         });
 
-        // Testimonial Slider
-        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
-        const testimonialDots = document.querySelectorAll('.testimonial-dot');
-        
-        function showSlide(index) {
-            // Hide all slides
-            testimonialSlides.forEach(slide => {
-                slide.classList.remove('active');
+        // Tooltip functionality
+        document.querySelectorAll('.tooltip').forEach(item => {
+            item.addEventListener('mouseover', function() {
+                const tooltipText = this.querySelector('.tooltip-text');
+                tooltipText.style.opacity = '1';
+                tooltipText.style.visibility = 'visible';
             });
             
-            // Remove active class from all dots
-            testimonialDots.forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            // Show selected slide and activate corresponding dot
-            testimonialSlides[index].classList.add('active');
-            testimonialDots[index].classList.add('active');
-        }
-        
-        // Add click event to dots
-        testimonialDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showSlide(index);
+            item.addEventListener('mouseout', function() {
+                const tooltipText = this.querySelector('.tooltip-text');
+                tooltipText.style.opacity = '0';
+                tooltipText.style.visibility = 'hidden';
             });
         });
-        
-        // Auto-rotate testimonials
-        let currentSlide = 0;
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % testimonialSlides.length;
-            showSlide(currentSlide);
-        }, 5000);
-
-        // Animation on scroll
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.facility-card, .feature-box');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if(elementPosition < windowHeight - 100) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
-        };
-
-        // Set initial state for animation
-        document.querySelectorAll('.facility-card, .feature-box').forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(30px)';
-            element.style.transition = 'all 0.6s ease';
-        });
-
-        // Add scroll event listener
-        window.addEventListener('scroll', animateOnScroll);
-        // Trigger once on page load
-        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>

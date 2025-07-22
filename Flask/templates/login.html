@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare+ E-Healthcare | Provider Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --primary-dark: #003d7a;
+            --secondary: #00a859;
+            --accent: #ff6b35;
+            --text: #333;
+            --light-text: #f8f9fa;
+            --bg: #f8f9fa;
+            --card-bg: #fff;
+            --dark-bg: #121212;
+            --dark-card-bg: #1e1e1e;
+            --border: #dee2e6;
+            --input-bg: #fff;
+            --dark-input-bg: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            transition: all 0.3s ease;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body[data-theme="dark"] {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body[data-theme="dark"] header {
+            background-color: var(--dark-card-bg);
+            border-bottom: 1px solid #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--text);
+            transition: transform 0.3s ease;
+        }
+
+        body[data-theme="dark"] .theme-toggle {
+            color: var(--light-text);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .login-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        body[data-theme="dark"] .login-container {
+            background-color: var(--dark-card-bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-image {
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .login-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-form {
+            padding: 50px;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        body[data-theme="dark"] .login-header h2 {
+            color: var(--primary-dark);
+        }
+
+        .login-header p {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        body[data-theme="dark"] .login-header p {
+            color: var(--light-text);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        body[data-theme="dark"] .form-group label {
+            color: var(--light-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: var(--input-bg);
+            color: var(--text);
+            transition: border-color 0.3s ease;
+        }
+
+        body[data-theme="dark"] .form-control {
+            background-color: var(--dark-input-bg);
+            border-color: #444;
+            color: var(--light-text);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text);
+            opacity: 0.7;
+        }
+
+        body[data-theme="dark"] .password-toggle {
+            color: var(--light-text);
+        }
+
+        .password-toggle:hover {
+            opacity: 1;
+        }
+
+        .password-strength {
+            margin-top: 5px;
+            height: 4px;
+            background-color: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .strength-0 {
+            width: 20%;
+            background-color: #dc3545;
+        }
+
+        .strength-1 {
+            width: 40%;
+            background-color: #fd7e14;
+        }
+
+        .strength-2 {
+            width: 60%;
+            background-color: #ffc107;
+        }
+
+        .strength-3 {
+            width: 80%;
+            background-color: #28a745;
+        }
+
+        .strength-4 {
+            width: 100%;
+            background-color: #28a745;
+        }
+
+        .strength-text {
+            font-size: 12px;
+            margin-top: 3px;
+            text-align: right;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #008a4f;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: var(--border);
+        }
+
+        body[data-theme="dark"] .divider::before,
+        body[data-theme="dark"] .divider::after {
+            background-color: #444;
+        }
+
+        .divider-text {
+            padding: 0 15px;
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        body[data-theme="dark"] .divider-text {
+            color: var(--light-text);
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn i {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn.google {
+            background-color: #4285F4;
+        }
+
+        .social-btn.google:hover {
+            background-color: #3367d6;
+        }
+
+        .social-btn.microsoft {
+            background-color: #7FBA00;
+        }
+
+        .social-btn.microsoft:hover {
+            background-color: #6aa700;
+        }
+
+        .two-factor-toggle {
+            margin-top: 20px;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .toggle-label {
+            margin-left: 10px;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        body[data-theme="dark"] .toggle-label {
+            color: var(--light-text);
+        }
+
+        /* Toggle switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--secondary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        body[data-theme="dark"] .register-link {
+            color: var(--light-text);
+        }
+
+        .register-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .register-link a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 20px 0;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.7;
+            border-top: 1px solid var(--border);
+            background-color: var(--card-bg);
+        }
+
+        body[data-theme="dark"] footer {
+            background-color: var(--dark-card-bg);
+            border-top: 1px solid #333;
+            color: var(--light-text);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--secondary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-image {
+                display: none;
+            }
+            
+            .login-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-form {
+                padding: 20px;
+            }
+            
+            .login-header h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <img src="https://placehold.co/60x60/0056b3/ffffff?text=MP" alt="Medicare+ E-Healthcare logo with blue and white design">
+                <h1>Medicare+ E-Healthcare</h1>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="login-container">
+                <div class="login-image">
+                    <img src="https://placehold.co/600x500/00a859/ffffff?text=Secure%20Healthcare%20Access" alt="Doctor reviewing medical records on tablet in modern hospital setting with blue accent lighting">
+                </div>
+                <div class="login-form">
+                    <div class="login-header">
+                        <h2>Provider Login</h2>
+                        <p>Access your medical dashboard securely</p>
+                    </div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="password-container">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                                <span class="password-toggle" id="passwordToggle"><i class="far fa-eye"></i></span>
+                            </div>
+                            <div class="password-strength">
+                                <div class="password-strength-meter" id="passwordStrength"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText">Password strength</div>
+                        </div>
+                        <div class="remember-forgot">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn">Sign In</button>
+                        <div class="divider">
+                            <span class="divider-text">or continue with</span>
+                        </div>
+                        <div class="social-login">
+                            <a href="#" class="social-btn google"><i class="fab fa-google"></i> Google</a>
+                            <a href="#" class="social-btn microsoft"><i class="fab fa-microsoft"></i> Microsoft</a>
+                        </div>
+                        <div class="two-factor-toggle">
+                            <div class="toggle-container">
+                                <label class="switch">
+                                    <input type="checkbox" id="twoFactorToggle">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="toggle-label">Enable Two-Factor Authentication</span>
+                            </div>
+                            <p class="toggle-description">Add an extra layer of security to your account</p>
+                        </div>
+                        <div class="register-link">
+                            Don't have an account? <a href="#" id="registerLink">Request access</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Medicare+ E-Healthcare. All rights reserved.</p>
+            <p>HIPAA Compliant | Secure Data Encryption</p>
+        </div>
+    </footer>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Authenticating...</p>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', currentTheme);
+        
+        if (currentTheme === 'dark') {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            if (newTheme === 'dark') {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Password toggle functionality
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+
+        passwordToggle.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            passwordToggle.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        // Password strength indicator
+        passwordInput.addEventListener('input', () => {
+            const password = passwordInput.value;
+            const strengthMeter = document.getElementById('passwordStrength');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            
+            // Check password length
+            if (password.length > 0) strength += 1;
+            if (password.length >= 8) strength += 1;
+            
+            // Check for special chars
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength += 1;
+            
+            // Check for mixed case
+            if (/(?=.*[a-z])(?=.*[A-Z])/.test(password)) strength += 1;
+            
+            // Check for numbers
+            if (/\d/.test(password)) strength += 1;
+            
+            // Update strength meter
+            strengthMeter.className = 'password-strength-meter strength-' + strength;
+            
+            // Update strength text
+            const strengthDescriptions = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+            strengthText.textContent = strengthDescriptions[strength];
+            
+            // Update color
+            const colors = ['#dc3545', '#fd7e14', '#ffc107', '#28a745', '#28a745'];
+            strengthMeter.style.backgroundColor = colors[strength];
+        });
+
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show loading overlay
+            loadingOverlay.style.display = 'flex';
+            
+            // Simulate API call
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                
+                // In a real app, you would handle the API response here
+                alert('Login successful! Redirecting to dashboard...');
+                
+                // Redirect to dashboard
+                // window.location.href = '/dashboard';
+            }, 2000);
+        });
+
+        // Register link
+        document.getElementById('registerLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Please contact your system administrator to request provider access.');
+        });
+
+        // Two-factor toggle animation
+        const twoFactorToggle = document.getElementById('twoFactorToggle');
+        twoFactorToggle.addEventListener('change', () => {
+            if (twoFactorToggle.checked) {
+                alert('Two-Factor Authentication will be enabled for your account');
+            }
+        });
+    </script>
+</body>
+</html>

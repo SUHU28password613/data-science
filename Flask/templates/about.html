@@ -3,391 +3,1209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MediCare - About Us</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>About MEDICARE+ | Your Digital Healthcare Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
+        :root {
+            --primary: #0066cc;
+            --secondary: #00a8e8;
+            --accent: #ff6b6b;
+            --dark: #2b2d42;
+            --light: #f8f9fa;
+            --gray: #6c757d;
         }
-        
-        .hero-video {
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #00a8e8 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
             position: relative;
-            height: 80vh;
             overflow: hidden;
         }
-        
-        .video-overlay {
+
+        .hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 119, 182, 0.7);
+            background: url('https://placehold.co/1920x1080') no-repeat center center;
+            background-size: cover;
+            opacity: 0.15;
         }
-        
-        .team-card:hover {
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .about-features {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 166, 204, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
-        
-        .counter-item {
-            transition: all 0.3s ease;
+
+        .feature-card-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 166, 204, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 1.8rem;
         }
-        
-        .counter-item:hover {
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Team Section */
+        .team {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-image {
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .team-member:hover .member-image img {
             transform: scale(1.05);
         }
-        
-        .testimonial-card {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+
+        .member-info {
+            padding: 20px;
+            text-align: center;
         }
-        
-        .testimonial-card.active {
-            opacity: 1;
+
+        .member-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
         }
-        
+
+        .member-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0066cc 0%, #00a8e8 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .demo h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .demo p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
+            max-width: 800px;
+            margin: 50px auto 0;
+            border-radius: 10px;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .video-container img {
             width: 100%;
-            height: 100%;
+            display: block;
+        }
+
+        /* Tools Section */
+        .tools {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .tool-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .tool-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 50px auto 0;
+            position: relative;
+        }
+
+        .testimonial {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: none;
+        }
+
+        .testimonial.active {
+            display: block;
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial p::before,
+        .testimonial p::after {
+            content: '"';
+            font-size: 40px;
+            color: var(--primary);
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .testimonial p::before {
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial p::after {
+            bottom: -30px;
+            right: -10px;
+        }
+
+        .testimonial-author h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .testimonial-author p {
+            font-style: normal;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #d1d5db;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 166, 204, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+
+        .contact-text h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .contact-text p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #adb5bd;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+
+            .video-container {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/825622b7-c0cc-40f7-9a98-93a6614f9c1e.png" alt="MediCare logo with a blue cross symbol and modern typography" class="h-12">
-                    <span class="ml-3 text-2xl font-bold text-blue-600">MediCare</span>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    MEDICARE<span>+</span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
-                    <a href="#" class="text-blue-600 font-medium">About</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600">Services</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600">Doctors</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
-                </div>
-                <button class="md:hidden focus:outline-none">
-                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-            </div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Doctors</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <a href="#" class="btn">Sign In</a>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Hero Section with Video Background -->
-    <section class="hero-video">
-        <div class="video-overlay flex items-center justify-center">
-            <div class="text-center px-4">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">About MediCare</h1>
-                <p class="text-xl text-white mb-8 max-w-2xl mx-auto">Revolutionizing healthcare through technology and compassionate service</p>
-                <a href="#our-mission" class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-blue-50 transition duration-300">Learn More</a>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Redefining Healthcare for the Digital Age</h1>
+                <p>MEDICARE+ combines cutting-edge technology with compassionate care to deliver superior health outcomes anytime, anywhere.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn">Get Started</a>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
             </div>
         </div>
-        <video autoplay muted loop class="w-full h-full object-cover">
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-doctor-with-a-stethoscope-in-a-hospital-48200-large.mp4" type="video/mp4">
-        </video>
     </section>
 
-    <!-- Our Mission Section -->
-    <section id="our-mission" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Mission & Vision</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About MEDICARE+</h2>
+                <p>Founded in 2020 with a vision to democratize healthcare through technology, MEDICARE+ has grown to serve over 1 million patients across 50 countries.</p>
             </div>
-            
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a3e240bf-c304-4796-a9f9-4d18b166f724.png" alt="Diverse team of healthcare professionals discussing patient care in a modern hospital setting" class="rounded-lg shadow-xl">
-                </div>
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Making Healthcare Accessible to All</h3>
-                    <p class="text-gray-600 mb-6">Founded in 2015, MediCare has been at the forefront of digital healthcare innovation. We believe that quality healthcare should be accessible, affordable, and convenient for everyone, regardless of their location or socioeconomic status.</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission</h3>
+                    <p>We're committed to making healthcare accessible, affordable, and effective for everyone through innovative digital solutions.</p>
                     
-                    <div class="mb-6">
-                        <div class="flex items-start mb-4">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <div class="feature-icon">🏥</div>
+                            <div class="feature-text">
+                                <h4>Comprehensive Care</h4>
+                                <p>From virtual consultations to chronic disease management.</p>
                             </div>
-                            <p class="text-gray-700">24/7 access to qualified doctors via video consultation</p>
                         </div>
-                        <div class="flex items-start mb-4">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+                        <div class="feature-item">
+                            <div class="feature-icon">💡</div>
+                            <div class="feature-text">
+                                <h4>AI-Powered Diagnostics</h4>
+                                <p>Early detection systems powered by machine learning.</p>
                             </div>
-                            <p class="text-gray-700">AI-powered symptom checker for quick preliminary diagnosis</p>
                         </div>
-                        <div class="flex items-start">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
+                        <div class="feature-item">
+                            <div class="feature-icon">🌐</div>
+                            <div class="feature-text">
+                                <h4>Global Network</h4>
+                                <p>Access to top specialists worldwide at your fingertips.</p>
                             </div>
-                            <p class="text-gray-700">Digital prescription and medicine delivery service</p>
                         </div>
                     </div>
-                    
-                    <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">Watch Our Story</button>
+                </div>
+                <div class="about-image">
+                    <img src="https://placehold.co/600x400" alt="Medical team collaborating in modern hospital using digital tablets and computer systems" />
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-blue-600 text-white">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="counter-item p-6">
-                    <div class="text-4xl font-bold mb-2 counter" data-target="500">0</div>
-                    <div class="text-lg">Qualified Doctors</div>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Platform Features</h2>
+                <p>Powerful tools designed to enhance both patient and provider experiences.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-card-icon">⚡</div>
+                    <h3>Instant Telemedicine</h3>
+                    <p>Connect with board-certified physicians in under 5 minutes, 24/7/365.</p>
+                    <a href="#" class="btn">Learn More</a>
                 </div>
-                <div class="counter-item p-6">
-                    <div class="text-4xl font-bold mb-2 counter" data-target="250000">0</div>
-                    <div class="text-lg">Patients Served</div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🧠</div>
+                    <h3>AI Symptom Checker</h3>
+                    <p>Our proprietary AI analyzes symptoms with 94% diagnostic accuracy.</p>
+                    <a href="#" class="btn">Learn More</a>
                 </div>
-                <div class="counter-item p-6">
-                    <div class="text-4xl font-bold mb-2 counter" data-target="24">0</div>
-                    <div class="text-lg">Hour Support</div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">📱</div>
+                    <h3>Mobile Health Records</h3>
+                    <p>Secure, encrypted access to your complete medical history anywhere.</p>
+                    <a href="#" class="btn">Learn More</a>
                 </div>
-                <div class="counter-item p-6">
-                    <div class="text-4xl font-bold mb-2 counter" data-target="95">0</div>
-                    <div class="text-lg">% Satisfaction</div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🔒</div>
+                    <h3>Blockchain Security</h3>
+                    <p>Military-grade encryption ensures your health data is protected.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">💊</div>
+                    <h3>Smart Prescriptions</h3>
+                    <p>ePrescriptions with automatic pharmacy notifications and refill reminders.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-card-icon">🏋️</div>
+                    <h3>Wellness Tracking</h3>
+                    <p>Integrated with 500+ wearables for comprehensive health monitoring.</p>
+                    <a href="#" class="btn">Learn More</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Team Section -->
-    <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Meet Our Leadership Team</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Leadership</h2>
+                <p>A diverse team of healthcare professionals, technologists, and innovators.</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Team Member 1 -->
-                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c8761878-0c85-49bf-ab25-44506ea9e919.png" alt="Dr. Sarah Johnson, Chief Medical Officer, middle-aged woman with short brown hair wearing white coat and stethoscope" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Dr. Sarah Johnson</h3>
-                        <p class="text-blue-600 mb-3">Chief Medical Officer</p>
-                        <p class="text-gray-600 text-sm">Board-certified physician with 20+ years of experience in internal medicine.</p>
+            <div class="team-members">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://placehold.co/600x800" alt="Dr. Sarah Johnson, Chief Medical Officer, middle-aged female doctor with warm smile wearing white coat" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Sarah Johnson</h3>
+                        <p>Chief Medical Officer</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Team Member 2 -->
-                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f610ec96-1802-4a1f-853c-98ff4d5e9331.png" alt="Raj Patel, CEO, middle-aged South Asian man in business casual attire smiling confidently" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Raj Patel</h3>
-                        <p class="text-blue-600 mb-3">CEO & Founder</p>
-                        <p class="text-gray-600 text-sm">Tech entrepreneur passionate about healthcare accessibility.</p>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://placehold.co/600x800" alt="Raj Patel, CEO, young male executive with stylish glasses in professional business attire" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Raj Patel</h3>
+                        <p>CEO & Co-Founder</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Team Member 3 -->
-                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/85a8c29a-d39b-4b76-802a-fb47300e9027.png" alt="Dr. Michael Chen, Head of Telemedicine, young Asian doctor with glasses looking at camera" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Dr. Michael Chen</h3>
-                        <p class="text-blue-600 mb-3">Head of Telemedicine</p>
-                        <p class="text-gray-600 text-sm">Pioneer in digital healthcare solutions and remote diagnostics.</p>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://placehold.co/600x800" alt="Dr. Michael Chen, Head of AI Research, asian male scientist in lab coat reviewing data" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Michael Chen</h3>
+                        <p>Head of AI Research</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Team Member 4 -->
-                <div class="team-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/12c75e25-996b-4719-9a93-1880c444de9b.png" alt="Priya Sharma, CTO, young Indian woman in tech attire standing in front of computer screens" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-800">Priya Sharma</h3>
-                        <p class="text-blue-600 mb-3">Chief Technology Officer</p>
-                        <p class="text-gray-600 text-sm">AI and healthcare technology expert with multiple patents.</p>
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="https://placehold.co/600x800" alt="Aisha Williams, VP of Patient Experience, african american woman in business suit smiling warmly" />
+                    </div>
+                    <div class="member-info">
+                        <h3>Aisha Williams</h3>
+                        <p>VP of Patient Experience</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Video Testimonial Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Patients Say</h2>
-                <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+    <!-- Demo Section -->
+    <section class="demo">
+        <div class="container">
+            <h2>See MEDICARE+ in Action</h2>
+            <p>Watch how our platform seamlessly connects patients with world-class healthcare providers.</p>
+            <div class="video-container">
+                <img src="https://placehold.co/800x450" alt="Video thumbnail showing doctor consultation through MEDICARE+ platform interface on tablet device" />
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="video-container rounded-lg shadow-xl overflow-hidden">
-                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section class="tools">
+        <div class="container">
+            <div class="section-title">
+                <h2>Advanced Healthcare Tools</h2>
+                <p>Our proprietary technologies empower both patients and providers.</p>
+            </div>
+            <div class="tools-container">
+                <div class="tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <h3>Predictive Analytics</h3>
+                    <p>Identifies potential health risks before symptoms appear using big data analysis.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
                 </div>
-                
-                <div class="flex flex-col justify-center">
-                    <div class="testimonial-card active">
-                        <p class="text-gray-700 text-lg italic mb-6">"MediCare saved me hours of waiting at the clinic. The doctor was thorough and prescribed exactly what I needed. The medicine arrived at my doorstep the same day!"</p>
-                        <div class="flex items-center">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18d1068d-f1c1-4ca9-9f5c-d09c10d182da.png" alt="James Wilson, satisfied patient, middle-aged Caucasian man smiling" class="w-12 h-12 rounded-full mr-4">
-                            <div>
-                                <h4 class="font-bold text-gray-800">James Wilson</h4>
-                                <p class="text-gray-600 text-sm">Patient since 2018</p>
+                <div class="tool-card">
+                    <div class="tool-icon">🧬</div>
+                    <h3>Genomic Health</h3>
+                    <p>Personalized medicine based on your genetic profile and family history.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🤖</div>
+                    <h3>Surgical Robotics</h3>
+                    <p>Remote-assisted procedures with sub-millimeter precision by top surgeons.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Patients Say</h2>
+                <p>Thousands have experienced the MEDICARE+ difference.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial active">
+                    <img src="https://placehold.co/200x200" alt="David Wilson, middle-aged businessman smiling professionally" />
+                    <p>The AI symptom checker correctly identified my condition when three different doctors missed it. MEDICARE+ literally saved my life.</p>
+                    <div class="testimonial-author">
+                        <h4>David Wilson</h4>
+                        <p>Hypertension Patient</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <img src="https://placehold.co/200x200" alt="Maria Garcia, elderly Hispanic woman smiling warmly with glasses" />
+                    <p>As someone with limited mobility, having specialists available via video chat has been transformative for my healthcare.</p>
+                    <div class="testimonial-author">
+                        <h4>Maria Garcia</h4>
+                        <p>Diabetes Patient</p>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <img src="https://placehold.co/200x200" alt="James Chen, young athletic man in fitness outfit" />
+                    <p>The wellness tracking integration with my wearables provides insights no single doctor could match. Revolutionary.</p>
+                    <div class="testimonial-author">
+                        <h4>James Chen</h4>
+                        <p>Fitness Enthusiast</p>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <div class="slider-dot active"></div>
+                    <div class="slider-dot"></div>
+                    <div class="slider-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>We'd love to hear from you. Contact us with any questions or feedback.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3>Contact Information</h3>
+                        <div class="contact-detail">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Corporate Headquarters</h4>
+                                <p>123 Medical Innovation Way<br>San Francisco, CA 94107</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>1-800-MEDICARE<br>(1-800-633-4227)</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-icon">✉️</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@medicareplus.com<br>support@medicareplus.com</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="flex mt-4">
-                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none active-nav"></button>
-                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none"></button>
-                        <button class="testimonial-nav bg-gray-200 w-3 h-3 rounded-full mx-1 focus:outline-none"></button>
+                    <div class="contact-card">
+                        <h3>Support Hours</h3>
+                        <div class="contact-detail">
+                            <div class="contact-icon">⏰</div>
+                            <div class="contact-text">
+                                <h4>Medical Support</h4>
+                                <p>24 hours / 7 days a week</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-icon">🖥️</div>
+                            <div class="contact-text">
+                                <h4>Technical Support</h4>
+                                <p>6AM - 12AM EST, Daily</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Call to Action -->
-    <section class="py-20 bg-blue-50">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Ready to Experience Better Healthcare?</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto mb-8">Join thousands of satisfied patients who trust MediCare for their healthcare needs.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#" class="bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300">Book an Appointment</a>
-                <a href="#" class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300">Download App</a>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="technical">Technical Support</option>
+                                <option value="medical">Medical Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="press">Press Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white pt-16 pb-8">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                <div>
-                    <div class="flex items-center mb-4">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/59a06536-fbfa-4830-80b3-f0b1aa42156b.png" alt="MediCare logo icon version" class="h-10">
-                        <span class="ml-3 text-xl font-bold">MediCare</span>
-                    </div>
-                    <p class="text-gray-400 mb-4">Your trusted digital healthcare partner.</p>
-                    <div class="flex space-x-4">
-                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f1eb49fa-9603-4aa5-9350-82693290570e.png" alt="Facebook social media icon" class="h-8 w-8"></a>
-                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7e3650c1-665f-42b9-a777-e26d08c53326.png" alt="Twitter social media icon" class="h-8 w-8"></a>
-                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18cc6099-e3ca-44f1-a07b-0e72b07ce220.png" alt="LinkedIn social media icon" class="h-8 w-8"></a>
-                        <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6db8d263-a1b5-4da3-8652-5d35d2e868a8.png" alt="Instagram social media icon" class="h-8 w-8"></a>
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>MEDICARE+</h3>
+                    <p>The future of healthcare is digital, personalized, and accessible to all.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Services</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Doctors</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Telemedicine</a></li>
+                        <li><a href="#">AI Diagnostics</a></li>
+                        <li><a href="#">E-Prescriptions</a></li>
+                        <li><a href="#">Health Records</a></li>
+                        <li><a href="#">Wellness Plans</a></li>
                     </ul>
                 </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Services</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Video Consultation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Symptom Checker</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Medicine Delivery</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Health Records</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Wellness Programs</a></li>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Leadership</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
                     </ul>
                 </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-                    <address class="text-gray-400 not-italic">
-                        <p class="mb-2">123 Health Street</p>
-                        <p class="mb-2">Medical District, NY 10001</p>
-                        <p class="mb-2">Phone: (123) 456-7890</p>
-                        <p class="mb-2">Email: info@medicare.com</p>
-                    </address>
+                <div class="footer-col">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">HIPAA Compliance</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Accessibility</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
-                <p>© 2023 MediCare. All rights reserved.</p>
+            <div class="footer-bottom">
+                <p>© 2023 MEDICARE+, Inc. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript for interactive elements -->
     <script>
-        // Counter Animation
         document.addEventListener('DOMContentLoaded', function() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200;
-            
-            counters.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const increment = target / speed;
-                    
-                    if(count < target) {
-                        counter.innerText = Math.ceil(count + increment);
-                        setTimeout(updateCount, 1);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
+            // Testimonial Slider
+            const testimonials = document.querySelectorAll('.testimonial');
+            const dots = document.querySelectorAll('.slider-dot');
+            let currentTestimonial = 0;
+
+            function showTestimonial(index) {
+                testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
                 
-                updateCount();
+                testimonials[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentTestimonial = index;
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showTestimonial(index);
+                });
             });
-            
-            // Testimonial Navigation
-            const testimonialCards = document.querySelectorAll('.testimonial-card');
-            const navButtons = document.querySelectorAll('.testimonial-nav');
-            
-            if(navButtons.length > 0) {
-                navButtons.forEach((button, index) => {
-                    button.addEventListener('click', () => {
-                        // Remove active class from all
-                        testimonialCards.forEach(card => card.classList.remove('active'));
-                        navButtons.forEach(btn => btn.classList.remove('active-nav'));
-                        
-                        // Add active class to selected
-                        testimonialCards[index].classList.add('active');
-                        button.classList.add('active-nav');
+
+            // Auto-rotate testimonials every 5 seconds
+            setInterval(() => {
+                let nextIndex = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(nextIndex);
+            }, 5000);
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message! Our team will get back to you shortly.');
+                contactForm.reset();
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
                     });
                 });
-            }
-            
-            // Mobile Menu Toggle
-            const mobileMenuButton = document.querySelector('button[class="md:hidden focus:outline-none"]');
-            if(mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', () => {
-                    const menu = document.querySelector('.hidden.md\\:flex.space-x-8');
-                    if(menu) {
-                        menu.classList.toggle('hidden');
-                    }
-                });
-            }
+            });
         });
     </script>
 </body>
 </html>
+
 
 

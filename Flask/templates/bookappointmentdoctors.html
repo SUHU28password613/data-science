@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare+ | Appointment Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--dark);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(37,99,235,0.9) 0%, rgba(16,185,129,0.8) 100%);
+        }
+        
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .calendar-day:hover:not(.disabled) {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .time-slot:hover:not(.booked) {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .checkout-btn {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .input-focus:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+        
+        .video-consult {
+            background: linear-gradient(135deg, rgba(245,158,11,0.9) 0%, rgba(239,68,68,0.8) 100%);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <img src="https://placehold.co/150x50?text=Medicare+" alt="Medicare+ E-Healthcare Logo" class="h-8">
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="#" class="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Home</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Doctors</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Services</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Pharmacy</a>
+                        <a href="#" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Health Records</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium">
+                        <i class="fas fa-user-md mr-2"></i>Doctor Login
+                    </button>
+                    <button class="ml-4 bg-white hover:bg-gray-50 text-blue-500 px-4 py-2 rounded-md text-sm font-medium border border-blue-500">
+                        <i class="fas fa-user mr-2"></i>Patient Login
+                    </button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
+                <div class="mb-8 lg:mb-0">
+                    <h1 class="text-4xl font-bold mb-4">Book Your Healthcare Appointment</h1>
+                    <p class="text-lg mb-6">Access top medical professionals from the comfort of your home or schedule in-person visits with our advanced booking system.</p>
+                    <div class="flex space-x-4">
+                        <button class="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-video mr-2"></i> Video Consultation
+                        </button>
+                        <button class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-hospital mr-2"></i> Clinic Visit
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-xl p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Find & Book Appointment</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-1">Specialty</label>
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 input-focus">
+                                <option>Select Specialty</option>
+                                <option>Cardiology</option>
+                                <option>Dermatology</option>
+                                <option>Neurology</option>
+                                <option>Pediatrics</option>
+                                <option>Orthopedics</option>
+                                <option>General Medicine</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-medium mb-1">Location</label>
+                            <div class="relative">
+                                <input type="text" placeholder="Enter location or postal code" class="w-full p-3 border border-gray-300 rounded-lg pr-10 input-focus">
+                                <i class="fas fa-map-marker-alt absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Date</label>
+                                <div class="relative">
+                                    <input type="date" class="w-full p-3 border border-gray-300 rounded-lg input-focus">
+                                    <i class="fas fa-calendar-alt absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Time</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg input-focus">
+                                    <option>Any Time</option>
+                                    <option>Morning (8am-12pm)</option>
+                                    <option>Afternoon (12pm-5pm)</option>
+                                    <option>Evening (5pm-9pm)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold mt-2">
+                            <i class="fas fa-search mr-2"></i> Find Doctors
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Doctor Selection Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Available Doctors</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Doctor Card 1 -->
+                <div class="doctor-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300">
+                    <div class="p-4 flex">
+                        <img src="https://placehold.co/100x100?text=Dr.+Smith" alt="Portrait of Dr. Emily Smith, Cardiologist with 15 years experience" class="w-20 h-20 rounded-full object-cover border-4 border-blue-100">
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Dr. Emily Smith</h3>
+                            <p class="text-gray-600">Cardiology</p>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">4.7 (128 reviews)</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mt-1">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Medicare Central Hospital, 2.5mi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pt-2 pb-4 bg-gray-50">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-blue-600">$120 - $180</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-calendar-plus mr-1"></i> Book
+                            </button>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600 flex justify-between">
+                            <span><i class="fas fa-video mr-1"></i> Telehealth</span>
+                            <span><i class="fas fa-clock mr-1"></i> Next: Today 3:30pm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor Card 2 -->
+                <div class="doctor-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300">
+                    <div class="p-4 flex">
+                        <img src="https://placehold.co/100x100?text=Dr.+Johnson" alt="Portrait of Dr. Michael Johnson, Dermatologist with 10 years experience" class="w-20 h-20 rounded-full object-cover border-4 border-blue-100">
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Dr. Michael Johnson</h3>
+                            <p class="text-gray-600">Dermatology</p>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">5.0 (92 reviews)</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mt-1">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>SkinCare Specialists, 1.8mi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pt-2 pb-4 bg-gray-50">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-blue-600">$150 - $200</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-calendar-plus mr-1"></i> Book
+                            </button>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600 flex justify-between">
+                            <span><i class="fas fa-user-md mr-1"></i> In-Person</span>
+                            <span><i class="fas fa-clock mr-1"></i> Next: Tomorrow 10:00am</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor Card 3 -->
+                <div class="doctor-card bg-white rounded-xl shadow-md overflow-hidden transition-transform duration-300">
+                    <div class="p-4 flex">
+                        <img src="https://placehold.co/100x100?text=Dr.+Lee" alt="Portrait of Dr. Sarah Lee, Pediatrician with 8 years experience" class="w-20 h-20 rounded-full object-cover border-4 border-blue-100">
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Dr. Sarah Lee</h3>
+                            <p class="text-gray-600">Pediatrics</p>
+                            <div class="flex items-center mt-1">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-500 text-sm ml-2">4.2 (156 reviews)</span>
+                            </div>
+                            <div class="flex items-center text-sm text-gray-500 mt-1">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>Children's Health Center, 3.2mi</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-4 pt-2 pb-4 bg-gray-50">
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-blue-600">$100 - $150</span>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm">
+                                <i class="fas fa-calendar-plus mr-1"></i> Book
+                            </button>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-600 flex justify-between">
+                            <span><i class="fas fa-video mr-1"></i> Telehealth</span>
+                            <span><i class="fas fa-clock mr-1"></i> Next: Today 4:45pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment Booking Section -->
+        <div class="bg-white rounded-xl shadow-xl overflow-hidden">
+            <div class="p-6 border-b">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-calendar-alt text-blue-500 mr-3"></i>
+                    Book Appointment with Dr. Emily Smith
+                </h2>
+                <p class="text-gray-600 mt-1">Cardiology Specialist</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-0">
+                <!-- Calendar Section -->
+                <div class="p-6 border-b lg:border-b-0 lg:border-r">
+                    <h3 class="font-bold text-lg mb-4">Select Date</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <button class="p-2 rounded-full hover:bg-gray-100">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="font-semibold">November 2023</span>
+                        <button class="p-2 rounded-full hover:bg-gray-100">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-7 gap-2 text-center">
+                        <div class="text-gray-500 text-sm font-medium py-2">Sun</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Mon</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Tue</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Wed</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Thu</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Fri</div>
+                        <div class="text-gray-500 text-sm font-medium py-2">Sat</div>
+                        
+                        <!-- Calendar Days -->
+                        <div class="calendar-day disabled py-4 text-gray-400 cursor-not-allowed">29</div>
+                        <div class="calendar-day disabled py-4 text-gray-400 cursor-not-allowed">30</div>
+                        <div class="calendar-day disabled py-4 text-gray-400 cursor-not-allowed">31</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">1</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">2</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">3</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">4</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">5</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">6</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">7</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">8</div>
+                        <div class="calendar-day selected bg-blue-500 text-white py-4 rounded-full cursor-pointer">9</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">10</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">11</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">12</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">13</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">14</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">15</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">16</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">17</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">18</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">19</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">20</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">21</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">22</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">23</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">24</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">25</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">26</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">27</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">28</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">29</div>
+                        <div class="calendar-day py-4 hover:bg-blue-100 rounded-full cursor-pointer">30</div>
+                        <div class="calendar-day disabled py-4 text-gray-400 cursor-not-allowed">1</div>
+                    </div>
+                </div>
+                
+                <!-- Time Slots Section -->
+                <div class="p-6 border-b lg:border-b-0 lg:border-r">
+                    <h3 class="font-bold text-lg mb-4">Available Time Slots</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <!-- Morning Slots -->
+                        <div>
+                            <h4 class="text-gray-500 text-sm font-medium mb-2">Morning</h4>
+                            <div class="space-y-2">
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    8:00 AM
+                                </button>
+                                <button class="time-slot booked w-full py-2 px-3 bg-gray-100 text-gray-400 rounded-md text-sm cursor-not-allowed">
+                                    8:30 AM (Booked)
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    9:00 AM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    9:30 AM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    10:00 AM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    10:30 AM
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Afternoon Slots -->
+                        <div>
+                            <h4 class="text-gray-500 text-sm font-medium mb-2">Afternoon</h4>
+                            <div class="space-y-2">
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    1:00 PM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    1:30 PM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    2:00 PM
+                                </button>
+                                <button class="time-slot selected bg-blue-500 text-white w-full py-2 px-3 rounded-md text-sm">
+                                    2:30 PM
+                                </button>
+                                <button class="time-slot w-full py-2 px-3 bg-gray-100 hover:bg-blue-500 hover:text-white rounded-md text-sm">
+                                    3:00 PM
+                                </button>
+                                <button class="time-slot booked w-full py-2 px-3 bg-gray-100 text-gray-400 rounded-md text-sm cursor-not-allowed">
+                                    3:30 PM (Booked)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appointment Details -->
+                <div class="p-6">
+                    <h3 class="font-bold text-lg mb-4">Appointment Details</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-user-md text-blue-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="font-semibold">Dr. Emily Smith</p>
+                                <p class="text-sm text-gray-600">Cardiology Specialist</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar-alt text-blue-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="font-semibold">Thursday, November 9</p>
+                                <p class="text-sm text-gray-600">2:30 PM - 3:00 PM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 text-xl mr-3"></i>
+                            <div>
+                                <p class="font-semibold">Medicare Central Hospital</p>
+                                <p class="text-sm text-gray-600">123 Medical Drive, Suite 400</p>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 mt-4 border-t">
+                            <h4 class="font-medium mb-2">Appointment Type</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center">
+                                    <input type="radio" name="appointmentType" class="form-radio text-blue-500" checked>
+                                    <span class="ml-2">In-Person Visit ($150)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="appointmentType" class="form-radio text-blue-500">
+                                    <span class="ml-2">Video Consultation ($120)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="pt-4 mt-4 border-t">
+                            <h4 class="font-medium mb-2">Reason for Visit</h4>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 input-focus" placeholder="Briefly describe your symptoms or reason for visit..."></textarea>
+                        </div>
+                        
+                        <button class="checkout-btn w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold mt-4">
+                            <i class="fas fa-lock mr-2"></i> Confirm & Pay
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insurance Information Section -->
+        <div class="bg-white rounded-xl shadow-xl overflow-hidden mt-8">
+            <div class="p-6 border-b">
+                <h2 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-shield-alt text-blue-500 mr-3"></i>
+                    Insurance Information
+                </h2>
+                <p class="text-gray-600 mt-1">We accept most major insurance plans</p>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold mb-4">Verify Your Coverage</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Insurance Provider</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 input-focus">
+                                    <option>Select Insurance Provider</option>
+                                    <option>Aetna</option>
+                                    <option>Blue Cross Blue Shield</option>
+                                    <option>Cigna</option>
+                                    <option>UnitedHealthcare</option>
+                                    <option>Medicare</option>
+                                    <option>Medicaid</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Member ID</label>
+                                <input type="text" placeholder="Enter your member ID" class="w-full p-3 border border-gray-300 rounded-lg input-focus">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 text-sm font-medium mb-1">Group Number (if applicable)</label>
+                                <input type="text" placeholder="Enter group number" class="w-full p-3 border border-gray-300 rounded-lg input-focus">
+                            </div>
+                            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold">
+                                <i class="fas fa-check-circle mr-2"></i> Verify Coverage
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-4">Accepted Insurance Plans</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                                <img src="https://placehold.co/80x40?text=Aetna" alt="Aetna insurance company logo" class="mr-2">
+                                <span class="font-medium">Aetna</span>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                                <img src="https://placehold.co/80x40?text=BCBS" alt="Blue Cross Blue Shield insurance company logo" class="mr-2">
+                                <span class="font-medium">BCBS</span>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                                <img src="https://placehold.co/80x40?text=Cigna" alt="Cigna insurance company logo" class="mr-2">
+                                <span class="font-medium">Cigna</span>
+                            </div>
+                            <div class="bg-gray-50 p-4 rounded-lg flex items-center">
+                                <img src="https://placehold.co/80x40?text=UHC" alt="UnitedHealthcare insurance company logo" class="mr-2">
+                                <span class="font-medium">UnitedHealthcare</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4">
+                            Don't see your insurance provider? Many plans have out-of-network benefits. Our staff can help verify your coverage.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Consultation Section -->
+        <div class="video-consult text-white rounded-xl shadow-xl overflow-hidden mt-8">
+            <div class="p-8">
+                <div class="md:flex md:items-center md:justify-between">
+                    <div class="md:w-1/2 mb-6 md:mb-0">
+                        <h2 class="text-3xl font-bold mb-4">Virtual Care When You Need It</h2>
+                        <p class="text-lg mb-6">Get quality healthcare from the comfort of your home with our secure video consultation platform.</p>
+                        <button class="bg-white text-orange-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold">
+                            <i class="fas fa-video mr-2"></i> Schedule Video Visit
+                        </button>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <div class="relative">
+                            <img src="https://placehold.co/500x300?text=Video+Consultation" alt="Doctor conducting video consultation with patient on laptop screen" class="rounded-lg shadow-xl">
+                            <div class="absolute -bottom-4 -right-4 bg-white rounded-full p-4 shadow-xl">
+                                <div class="bg-blue-500 text-white rounded-full p-3">
+                                    <i class="fas fa-video text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold mb-8 text-center">Why Choose Medicare+</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Same-Day Appointments</h3>
+                    <p class="text-gray-600">Book urgent appointments with qualified doctors today.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-briefcase-medical"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Specialized Care</h3>
+                    <p class="text-gray-600">Access to specialists across various medical fields.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Digital Health Tools</h3>
+                    <p class="text-gray-600">Integrated health records and prescription management.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://placehold.co/150x50?text=Medicare+" alt="Medicare+ E-Healthcare Logo" class="h-8 mb-4">
+                    <p class="text-gray-400">Comprehensive healthcare solutions for modern patients.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Find a Doctor</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Book Appointment</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Virtual Care</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Health Records</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pharmacy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    
