@@ -41,7 +41,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/registration.html')
-def registation():
+def registration():
     return render_template('registration.html')
 
 
